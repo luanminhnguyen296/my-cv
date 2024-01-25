@@ -14,8 +14,7 @@
           .split("&")
           .map(function (s) {
             return s.replace(/~and~/g, "&");
-          })
-          .join("?");
+          });
         window.history.replaceState(
           null,
           null,
