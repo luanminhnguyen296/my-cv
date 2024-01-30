@@ -19,7 +19,6 @@ export default function Footer() {
   ]
   return (
     <footer>
-      {import.meta.env.FACEBOOK}
       <div className='flex border-t border-gray-400 justify-between text-[.8rem] items-center py-4 px-12'>
         <ul className='flex gap-4'>
           {

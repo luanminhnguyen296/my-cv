@@ -29,10 +29,13 @@ export type TFormContact = {
    message?: string
 }
 
+
+export type TDataToastMessages = {
+   status: 'success' | 'error',
+   msg: string
+}
+
 export interface TToastProps {
-   data?: {
-      status: 'success' | 'error',
-      msg: string
-   },
+   data?: TDataToastMessages,
    onCloseToast: (values: any) => void
 }

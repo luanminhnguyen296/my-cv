@@ -1,6 +1,6 @@
-import { alertFormField } from '@/constants/alert-validation'
-import * as Yup from 'yup'
-import { phoneRegExp } from './regex';
+import { alertFormField } from '@/constants/alert-validation';
+import * as Yup from 'yup';
+import "yup-phone-lite";
 
 
 export const validationSchema: any = {
@@ -12,7 +12,7 @@ export const validationSchema: any = {
    email: Yup.string().email(alertFormField.email)
       .required(alertFormField.fillNotNull),
    phone: Yup.string()
-      .matches(phoneRegExp, alertFormField.phone)
+      .phone('VN', alertFormField.phone)
       .required(alertFormField.fillNotNull),
    password: Yup.string()
       .matches(/[a-zA-Z]/, alertFormField.passwordRequireLetter)

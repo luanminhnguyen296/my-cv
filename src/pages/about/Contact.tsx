@@ -4,9 +4,9 @@ import Heading from '@/components/UI/Dropdown/Heading';
 import ToastCV from "@/components/UI/ToastCV";
 import { validationSchemaContact } from "@/helpers/validation/form";
 import { TReturnAddContact, addContact } from "@/services/contact-form";
-import { TFormContact, TToastProps } from "@/types";
+import { TDataToastMessages, TFormContact } from "@/types";
 import { FastField, Form, Formik } from "formik";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Github, Mailbox, Phone, PinMap } from "react-bootstrap-icons";
 
 
@@ -32,27 +32,57 @@ const contacts: TContact[] = [
 ]
 
 export default function Contact() {
-   const [toast, setToast] = useState<any>();
-   const formContact: TFormContact = {
+   const [toast, setToast] = useState<TDataToastMessages | null>(null);
+   const [messageStore, setMessageStore] = useState<TFormContact | null>(null);
+   const [formContact, setFormContact] = useState<TFormContact>({
       email: '',
       phone: '',
       name: '',
       message: ''
-   }
+   });
 
-   async function handleSubmit(values: TFormContact) {
+   async function handleSubmit(values: TFormContact, actions: any) {
+      localStorage.setItem('message', JSON.stringify(values))
+      setMessageStore(values)
 
       const result: TReturnAddContact = await addContact(values)
       if (result.isSuccess) {
-         alert('success')
          setToast({
             status: 'success',
-            msg: 'ok'
+            msg: 'Thank you for sending the message. I will get back to you as soon as I receive your information.'
          })
-      } else alert('error')
+         actions.resetForm();
+      } else {
+         setToast({
+            status: 'error',
+            msg: 'Message delivery failed due to an unknown error. Please try again later!'
+         })
+      }
 
       console.log("🚀 ~ handleSubmit ~ TFormContact:", values)
    }
+
+   function getMessageStore() {
+      const res = localStorage.getItem('message');
+      if (res !== 'null' && res) {
+         setMessageStore(JSON.parse(res))
+      }
+   }
+
+   useEffect(() => {
+      console.log('formContact', formContact);
+
+   }, [formContact])
+
+   function handleWatchMessageSent() {
+      console.log('update', messageStore);
+
+      if (messageStore?.email)
+         setFormContact({ ...messageStore })
+   }
+
+   useEffect(getMessageStore, [])
+
    return (
       <div id='contact' className='flex w-full flex-col lg:flex-row gap-8 mb-10 mt-10'>
 
@@ -79,7 +109,7 @@ export default function Contact() {
          </div>
          <div className="flex flex-col flex-1">
             <Heading title="Send messages for me" className="mb-8" />
-            <Formik initialValues={formContact} validationSchema={validationSchemaContact} validateOnBlur={true} onSubmit={handleSubmit}>
+            <Formik enableReinitialize={true} initialValues={formContact} validationSchema={validationSchemaContact} validateOnBlur={true} onSubmit={handleSubmit}>
                {
                   ({ resetForm, isSubmitting }) => (
                      <Form className='flex w-full'>
@@ -93,6 +123,10 @@ export default function Contact() {
                               <FastField className='w-full h-full self-stretch ' type='textarea' name="message" label="Messages" placeholder="Messages..." component={InputField} />
                               <div className="w-full flex mt-2">
                                  <CVButton type='submit' cvType='bg-color' disabled={isSubmitting}>Send message</CVButton>
+                                 {
+                                    messageStore?.email &&
+                                    <CVButton cvType='bg-default' className="ml-3" onClick={handleWatchMessageSent}>Watch message sent</CVButton>
+                                 }
                                  <CVButton cvType='bg-default' className="ml-3" type='reset' onClick={() => resetForm()}>Reset</CVButton>
                               </div>
                            </div>
