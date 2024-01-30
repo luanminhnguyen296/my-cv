@@ -21,3 +21,18 @@ export interface IEducation {
    major: string;
    content: string;
 }
+
+export type TFormContact = {
+   email: string,
+   phone: string,
+   name: string,
+   message?: string
+}
+
+export interface TToastProps {
+   data?: {
+      status: 'success' | 'error',
+      msg: string
+   },
+   onCloseToast: (values: any) => void
+}
