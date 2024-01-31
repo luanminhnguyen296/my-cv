@@ -1,5 +1,6 @@
 import Heading from '@/components/UI/Dropdown/Heading';
 import jobs from '@/constants/experience';
+import idSections from '@/constants/id-section-page';
 import { IWorkExperience, TDetailWork } from '@/types';
 import React from "react";
 interface Props {
@@ -51,7 +52,7 @@ const Content: React.FC<Props> = ({ item }) => {
 export default function Experience() {
 
    return (
-      <div id='experience' className='flex flex-0 w-full flex-col mt-10'>
+      <div id={idSections.experience} className='flex flex-0 w-full flex-col'>
          <Heading title="Experience" />
          <div className="flex flex-wrap pl-5">
             {jobs.map((i, id) => <Content key={id} item={i} />)}

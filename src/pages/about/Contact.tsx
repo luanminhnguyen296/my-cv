@@ -2,6 +2,7 @@ import InputField from "@/components/Forms/InputField";
 import CVButton from "@/components/UI/Button";
 import Heading from '@/components/UI/Dropdown/Heading';
 import ToastCV from "@/components/UI/ToastCV";
+import idSections from "@/constants/id-section-page";
 import { validationSchemaContact } from "@/helpers/validation/form";
 import { TReturnAddContact, addContact } from "@/services/contact-form";
 import { TDataToastMessages, TFormContact } from "@/types";
@@ -84,7 +85,7 @@ export default function Contact() {
    useEffect(getMessageStore, [])
 
    return (
-      <div id='contact' className='flex w-full flex-col lg:flex-row gap-8 mb-10 mt-10'>
+      <div id={idSections.contact} className='flex w-full flex-col lg:flex-row gap-8 mb-10'>
 
          {
             toast && <ToastCV data={toast} onCloseToast={setToast} />
@@ -121,8 +122,8 @@ export default function Contact() {
                            </div>
                            <div className="flex flex-col grow justify-between">
                               <FastField className='w-full h-full self-stretch ' type='textarea' name="message" label="Messages" placeholder="Messages..." component={InputField} />
-                              <div className="w-full flex mt-2">
-                                 <CVButton type='submit' cvType='bg-color' disabled={isSubmitting}>Send message</CVButton>
+                              <div className="w-full flex mt-4">
+                                 <CVButton type='submit' cvType='bg-cv' disabled={isSubmitting}>Send message</CVButton>
                                  {
                                     messageStore?.email &&
                                     <CVButton cvType='bg-default' className="ml-3" onClick={handleWatchMessageSent}>Watch message sent</CVButton>

@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from 'flowbite-react'
 
-type TCVType = 'border-color' | 'border-default' | 'bg-default' | 'bg-color'
+type TCVType = 'border-color' | 'border-default' | 'bg-default' | 'bg-color' | 'bg-cv'
 
 interface ICVButton extends ButtonProps {
    cvType?: TCVType
@@ -14,6 +14,10 @@ const styleButton = {
    bgDefault: `transition duration-150 ease-in-out inline hover:shadow-lg 
    bg-gray-100 border-0 enabled:hover:bg-gray-200
    dark:bg-zinc-700 dark:border-gray-400 dark:border-2 dark:enabled:hover:bg-white dark:enabled:hover:border-white dark:hover:text-gray-800`,
+
+   bgCv: `transition duration-150 ease-in-out inline border-2 mr-5 
+   border-cv-700 shadow-cv-xl dark:shadow-cv-xl enabled:hover:bg-cv-700 hover:text-white 
+   dark:border-cv-700 dark:enabled:hover:bg-cv-700 dark:hover:text-white dark:enabled:hover:border-cv-700`,
 
    bgColor: `transition duration-150 ease-in-out inline
    bg-cv-600 text-white border-0 enabled:hover:bg-cv-800 hover:text-white hover:shadow-lg 
@@ -32,6 +36,8 @@ const getStyle = (cvType: TCVType) => {
          return styleButton.bgDefault
       case 'bg-color':
          return styleButton.bgColor
+      case 'bg-cv':
+         return styleButton.bgCv
       default:
          return styleButton.borderDefault
    }

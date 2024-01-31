@@ -5,7 +5,11 @@ import Overview from './Overview'
 import WhatIsDo from './WhatIsDo'
 import Experience from './Experience'
 import Contact from './Contact'
+import Skill from './Skill'
+import Portfolio from './Portfolio'
 
+
+const Hr = () => <hr className='w-full border-gray-600' />
 const About = () => {
   return (
     <>
@@ -14,9 +18,16 @@ const About = () => {
       </Helmet>
       <Overview />
       <WhatIsDo />
+      {/* <Hr /> */}
       <Education />
       <Certificates />
+      <Skill />
+      {/* <Hr /> */}
       <Experience />
+      {/* <Hr /> */}
+      <Portfolio />
+      {/* <Hr /> */}
+      {/* <Hr /> */}
       <Contact />
     </>
   )

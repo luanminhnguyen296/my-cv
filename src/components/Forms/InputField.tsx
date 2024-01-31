@@ -26,7 +26,7 @@ const InputField = (props: IProps) => {
 
 
    return (
-      <div className={`flex flex-col mb-2 ${className}`}>
+      <div className={`flex flex-col ${className}`}>
          {
             label && <div> <Label className='mb-2 inline-block' htmlFor={name} value={label} /> </div>
          }

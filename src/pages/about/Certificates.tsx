@@ -4,6 +4,7 @@ import marketingLogo from '@/assets/marketing-icon.svg?react';
 import designLogo from '@/assets/design-icon.svg?react';
 import itLogo from '@/assets/it-icon.svg?react';
 import { ICertificate } from '@/types';
+import idSections from '@/constants/id-section-page';
 
 interface Props {
    item: ICertificate
@@ -56,7 +57,7 @@ const Content: React.FC<Props> = ({ item }) => {
 export default function Certificates() {
 
    return (
-      <div id='certificates' className='flex flex-1 flex-col mt-10 ml-0 md:ml-8'>
+      <div id={idSections.certificate} className='flex flex-1 flex-col ml-0 md:ml-8'>
          <Heading title="Certificates" />
          <div className="flex flex-wrap flex-1 gap-y-3 lg:gap-y-8">
             {certificates.map((i, id) => <Content key={id} item={i} />)}

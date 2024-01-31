@@ -45,11 +45,11 @@ const Content: React.FC<Props> = ({ title, job }) => {
    )
 }
 
-export default function WhatIsDo() {
+export default function Portfolio() {
 
    return (
-      <div id={idSections.whatIsDo} className='flex flex-col mt-5'>
-         <Heading title="What I Do" />
+      <div id={idSections.portfolio} className='flex flex-col '>
+         <Heading title="Portfolio" />
          <div className="flex flex-wrap gap-y-14 gap-x-5">
             {jobs.map((i, id) => <Content title={i.title} key={id} job={i.job} />)}
          </div>

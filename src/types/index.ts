@@ -37,5 +37,6 @@ export type TDataToastMessages = {
 
 export interface TToastProps {
    data?: TDataToastMessages,
+   delayAutoClose?: number,
    onCloseToast: (values: any) => void
 }

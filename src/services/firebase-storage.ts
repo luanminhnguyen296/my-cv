@@ -1,7 +1,7 @@
-import { storage } from "@/services/firebase";
+// import { storage } from "@/services/firebase";
 import axios from "axios";
 import { saveAs } from "file-saver";
-import { ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL, getStorage } from "firebase/storage";
 
 
 async function handleDownloadDOM(url: string) {
@@ -18,6 +18,7 @@ async function handleDownloadDOM(url: string) {
 }
 export async function downloadCVPDF() {
    // Create a reference to the file we want to download
+   const storage = getStorage();
    const starsRef = ref(storage, import.meta.env.VITE_URL_CV_PDF);
 
    // Get the download URL

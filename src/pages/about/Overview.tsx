@@ -1,7 +1,9 @@
 import avatar from '@/assets/avatar.png';
 import ToastCV from '@/components/UI/ToastCV';
-import { downloadCVPDF } from '@/helpers/firebase/storage';
+import idSections from '@/constants/id-section-page';
+import { downloadCVPDF } from '@/services/firebase-storage';
 import { TDataToastMessages } from '@/types';
+import { scrollToSection } from '@/utils/function-helper';
 import { Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -50,7 +52,7 @@ export default function Overview() {
    }, [])
 
    return (
-      <div className='flex flex-col md:flex-row m-auto md:max-w-[1140px]'>
+      <div id={idSections.overview} className='flex flex-col md:flex-row m-auto md:max-w-[1140px]'>
          {
             toast && <ToastCV data={toast} onCloseToast={setToast} />
          }
@@ -74,7 +76,9 @@ export default function Overview() {
                   Download CV
                </Button>
                <Button className='transition duration-150 ease-in-out inline shadow-lg dark:bg-zinc-700 dark:border-gray-400 dark:border-2
-               dark:enabled:hover:bg-white dark:enabled:hover:border-white dark:hover:text-gray-800' color="light" pill>
+               dark:enabled:hover:bg-white dark:enabled:hover:border-white dark:hover:text-gray-800' color="light" pill
+                  onClick={() => scrollToSection(idSections.contact)}
+               >
                   Contact
                </Button>
             </div>
