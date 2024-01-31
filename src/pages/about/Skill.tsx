@@ -1,5 +1,6 @@
 import Heading from '@/components/UI/Dropdown/Heading';
-import SkillLine, { TSkillLineProps } from '@/components/UI/SkillLine';
+import { TSkillLineProps } from '@/components/UI/SkillLine';
+import SkillTag from '@/components/UI/SkillTag';
 import idSections from "@/constants/id-section-page";
 
 
@@ -94,20 +95,22 @@ const DesignSkills: TSkillLineProps[] = [
 export default function Skill() {
 
    return (
-      <div id={idSections.skill} className='flex flex-col lg:flex-row md:gap-12 w-full gap-y-10'>
+      <div id={idSections.skill} className='flex flex-col lg:flex-row md:gap-24 w-full gap-y-10'>
          <div className="flex flex-col flex-1">
             <Heading title="Coding Skills" className="mb-9" />
-            <div className="flex flex-row flex-wrap gap-7">
+            <div className="flex flex-row flex-wrap gap-2">
                {
-                  codingSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
+                  // codingSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
+                  codingSkills.map((skill) => <SkillTag key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
                }
             </div>
          </div>
          <div className="flex flex-col flex-1">
             <Heading title="Design Skills" className="mb-9" />
-            <div className="flex flex-row flex-wrap gap-7">
+            <div className="flex flex-row flex-wrap gap-2">
                {
-                  DesignSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
+                  DesignSkills.map((skill) => <SkillTag key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
+                  // DesignSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
                }
             </div>
          </div>
