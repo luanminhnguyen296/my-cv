@@ -1,14 +1,13 @@
 import { Outlet } from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
-import styled from 'styled-components'
+import PointEffect from '@/components/UI/PointEffect';
 
 export default function MainLayout() {
-  const PointEffect = styled.div`
-    
-  `
+
   return (
     <>
+
       <PointEffect />
       <Header />
       <main className='flex justify-center flex-1 p-5'>

@@ -4,8 +4,9 @@ import Heading from '@/components/UI/Dropdown/Heading';
 import ToastCV from "@/components/UI/ToastCV";
 import idSections from "@/constants/id-section-page";
 import { validationSchemaContact } from "@/helpers/validation/form";
-import { TReturnAddContact, addContact } from "@/services/contact-form";
+import { TReturnAddContact, addContact } from "@/services/fire-store";
 import { TDataToastMessages, TFormContact } from "@/types";
+import { SchemaContact } from "@/types/schema";
 import { FastField, Form, Formik } from "formik";
 import { FC, useEffect, useState } from "react";
 import { Github, Mailbox, Phone, PinMap } from "react-bootstrap-icons";
@@ -43,10 +44,15 @@ export default function Contact() {
    });
 
    async function handleSubmit(values: TFormContact, actions: any) {
+      const newValue: SchemaContact = {
+         ...values,
+         createAt: Date.now(),
+         userAgent: navigator.userAgent
+      }
       localStorage.setItem('message', JSON.stringify(values))
       setMessageStore(values)
 
-      const result: TReturnAddContact = await addContact(values)
+      const result: TReturnAddContact = await addContact(newValue)
       if (result.isSuccess) {
          setToast({
             status: 'success',
@@ -60,7 +66,6 @@ export default function Contact() {
          })
       }
 
-      console.log("🚀 ~ handleSubmit ~ TFormContact:", values)
    }
 
    function getMessageStore() {
@@ -69,11 +74,6 @@ export default function Contact() {
          setMessageStore(JSON.parse(res))
       }
    }
-
-   useEffect(() => {
-      console.log('formContact', formContact);
-
-   }, [formContact])
 
    function handleWatchMessageSent() {
       console.log('update', messageStore);

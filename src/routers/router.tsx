@@ -70,6 +70,9 @@ function renderRoutes(route: TRoute) {
 const router: Router = createBrowserRouter(createRoutesFromElements(
   [
     <Route errorElement={<NotFound />}>
+      <Route element={<MainLayout />}>
+        <Route key='*' path='*' element={<NotFound />} />
+      </Route>
       {routes.map(renderRoutes)}
     </Route>
   ]

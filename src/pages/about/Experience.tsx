@@ -29,13 +29,14 @@ const Content: React.FC<Props> = ({ item }) => {
       <div className="flex flex-col text-sm border-l pl-2 pt-5 first:pt-3 pb-3 border-b last:border-b-0
       dark:border-gray-600
       ">
-         <div className="mb-2 ml-[-30px]">
-            <span className="text-cv-700 py-1.5 px-4 inline-block bg-white font-semibold border-2 rounded-3xl border-cv-700 mr-3
+         <div className="mb-2 ml-[-30px] flex items-center">
+            <span className="text-cv-700 py-1.5 px-4 inline-block flex-none h-fit bg-white font-semibold border-2 rounded-3xl border-cv-700 mr-3
             dark:bg-gray-800 dark:text-gray-100
+            text-xs md:text-sm
             ">
                {item.year}
             </span>
-            <span className="text-gray-500 dark:text-gray-200 font-bold text-lg">{item.major}</span>
+            <span className="text-gray-500 dark:text-gray-200 font-semibold text-sm lg:text-xl">{item.major}</span>
          </div>
          <div className="pl-4 pt-2">
             <div className="text-sm dark:text-gray-400">

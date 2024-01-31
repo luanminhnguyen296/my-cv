@@ -58,7 +58,7 @@ export default function MainMenu() {
             toast && <ToastCV data={toast} onCloseToast={setToast} />
          }
          {
-            menus.map(menu => <Navbar.Link as={Link} key={menu.path} className='font-[500] md:px-4 py-2 leading-10' onClick={() => scrollToSection(menu.path)} to={menu.path}>{menu.title}</Navbar.Link>)
+            menus.map(menu => <Navbar.Link as={Link} key={menu.path} className='font-[500] md:px-4 py-2 leading-10' onClick={() => scrollToSection(menu.path)} to={`/${menu.path}`}>{menu.title}</Navbar.Link>)
          }
          <Navbar.Link as={'a'} className='font-[500] md:px-4 py-2 leading-10' onClick={handleDownloadCV} >Download CV</Navbar.Link>
          <Navbar.Link className='ml-0 lg:ml-3'><ToggleThemeMode /></Navbar.Link>

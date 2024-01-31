@@ -10,7 +10,7 @@ import { router } from './routers/router'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <div className='min-h-screen dark:bg-dark-mode dark:text-content flex flex-col justify-between pt-5'>
+    <div className='min-h-screen dark:bg-dark-mode dark:text-content flex flex-col justify-between pt-5 relative'>
       <Flowbite theme={{ theme: customFlowbiteTheme }}>
         <HelmetProvider>
           <RouterProvider router={router} />

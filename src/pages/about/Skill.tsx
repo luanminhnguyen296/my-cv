@@ -1,16 +1,8 @@
-import React from "react"
 import Heading from '@/components/UI/Dropdown/Heading';
-import { CodeSquare, Palette } from "react-bootstrap-icons";
-import idSections from "@/constants/id-section-page";
 import SkillLine, { TSkillLineProps } from '@/components/UI/SkillLine';
+import idSections from "@/constants/id-section-page";
 
-interface Props {
-   title: string;
-   job: {
-      icon: any;
-      content: string;
-   }
-}
+
 
 const codingSkills: TSkillLineProps[] = [
    {
@@ -31,6 +23,10 @@ const codingSkills: TSkillLineProps[] = [
    },
    {
       title: 'Vue.js',
+      percentExp: 60
+   },
+   {
+      title: 'SASS/LESS',
       percentExp: 60
    },
    {
@@ -103,7 +99,7 @@ export default function Skill() {
             <Heading title="Coding Skills" className="mb-9" />
             <div className="flex flex-row flex-wrap gap-7">
                {
-                  codingSkills.map((skill) => <SkillLine title={skill.title} percentExp={skill.percentExp} />)
+                  codingSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
                }
             </div>
          </div>
@@ -111,7 +107,7 @@ export default function Skill() {
             <Heading title="Design Skills" className="mb-9" />
             <div className="flex flex-row flex-wrap gap-7">
                {
-                  DesignSkills.map((skill) => <SkillLine title={skill.title} percentExp={skill.percentExp} />)
+                  DesignSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
                }
             </div>
          </div>
