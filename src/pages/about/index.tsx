@@ -4,7 +4,7 @@ import Contact from './Contact'
 import Education from './Education'
 import Experience from './Experience'
 import Overview from './Overview'
-// import Portfolio from './Portfolio'
+import Portfolio from './Portfolio'
 import Skill from './Skill'
 import WhatIsDo from './WhatIsDo'
 
@@ -18,10 +18,10 @@ const About = () => {
       <Overview />
       <WhatIsDo />
       <Experience />
+      <Portfolio />
       <Skill />
       <Education />
       <Certificates />
-      {/* <Portfolio /> */}
       <Contact />
     </>
   )

@@ -41,3 +41,13 @@ export interface TToastProps {
    delayAutoClose?: number,
    onCloseToast: (values: any) => void
 }
+
+export interface IProject {
+   joinAt: number,
+   thumbnail?: string,
+   title: string,
+   url?: string,
+   description: string,
+   task: string,
+   tech: string[],
+}

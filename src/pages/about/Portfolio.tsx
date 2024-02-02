@@ -1,45 +1,34 @@
-import React from "react"
 import Heading from '@/components/UI/Dropdown/Heading';
-import { CodeSquare, Palette } from "react-bootstrap-icons";
 import idSections from "@/constants/id-section-page";
+import { IProject } from "@/types";
+import React from "react";
+import { ArrowUpRight } from 'react-bootstrap-icons'
+import SkillTag from '@/components/UI/SkillTag';
+import { projects } from '@/constants/project';
 
-interface Props {
-   title: string;
-   job: {
-      icon: any;
-      content: string;
-   }
-}
 
-const jobs: Props[] = [
-   {
-      title: 'Graphic Designer',
-      job: {
-         icon: Palette,
-         content: 'With more than four years of comprehensive expertise in graphic design spanning social media, marketing, branding, packaging, and website design, I specialize in delivering visually compelling designs rich in both aesthetics and meaningful messaging.'
-      }
-   },
-   {
-      title: 'Frontend Developer',
-      job: {
-         icon: CodeSquare,
-         content: 'More than 1.5 years of experience learning and practicing Frontend projects for websites and Chrome extensions with frameworks such as Reactjs, Vuejs, Solidjs and css frameworks such as AntDesign, Tailwind, Primer,...'
-      }
-   }
-]
 
-const Content: React.FC<Props> = ({ title, job }) => {
-   const Icon = job.icon
+const Content: React.FC<Props> = ({ project }: { project: IProject }) => {
    return (
-      <div className="flex flex-0 md:flex-1 px-[15px]">
-         <div className="text-cv-700 text-4xl pr-10 mx-[-20px]">
-            <Icon />
+      <div className="flex p-4 gap-x-4 cursor-pointer hover:bg-gray-100 hover:border-gray-500 rounded-lg">
+         <div className="text-cv-700 text-4xl mt-1">
+            <img src={project.thumbnail} className='max-w-20' />
          </div>
          <div className="flex-0 md:flex-1">
-            <h5 className="font-semibold mb-3">{title}</h5>
-            <p className="text-sm">
-               {job.content}
+            <a href={project.url} className="font-semibold mb-1 flex gap-x-2 items-center">
+               {project.title}
+               <ArrowUpRight />
+            </a>
+            <p className="text-sm font-light text-gray-500 mb-2">
+               {project.description}
             </p>
+            <div className='text-sm text-gray-600 mb-2'>
+               <span className='font-semibold'>Task:</span>
+               <span className='ml-2'>{project.task}</span>
+            </div>
+            <div className='flex flex-wrap gap-2'>
+               {project.tech.map((i, id) => <SkillTag title={i} key={id} size='small' />)}
+            </div>
          </div>
       </div>
    )
@@ -48,10 +37,10 @@ const Content: React.FC<Props> = ({ title, job }) => {
 export default function Portfolio() {
 
    return (
-      <div id={idSections.portfolio} className='flex flex-col '>
+      <div id={idSections.portfolio} className='flex basis-[40%] flex-col ml-10'>
          <Heading title="Portfolio" />
          <div className="flex flex-wrap gap-y-14 gap-x-5">
-            {jobs.map((i, id) => <Content title={i.title} key={id} job={i.job} />)}
+            {projects.map((i) => <Content project={i} key={i.joinAt} />)}
          </div>
       </div>
    )

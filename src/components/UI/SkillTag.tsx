@@ -1,19 +1,29 @@
 
-
-export type TSkillLineProps = {
+export type TSizeTag = 'small' | 'medium' | 'large'
+export type TSkillTagProps = {
    title: string;
-   percentExp: number;
+   size?: TSizeTag;
 }
 
-function SkillTag({ title }: TSkillLineProps) {
+function SkillTag({ title, size = 'medium' }: TSkillTagProps) {
 
-
+   function getClassSize(size: TSizeTag) {
+      switch (size) {
+         case 'small':
+            return 'text-xs px-3 py-2'
+         case 'medium':
+            return 'text-sm px-5 py-3'
+         case 'large':
+            return 'text-lg px-7 py-4'
+      }
+   }
    return (
-      <span className=" rounded-3xl font-semibold py-3 leading-none px-5
-      text-sm
+      <span className={`
+      ${getClassSize(size)}
+         rounded-3xl font-semibold leading-none 
       text-cv-700 bg-[#2f56e316]
       dark:text-[#44e3ff] dark:bg-[#3991d523]
-      ">
+      `}>
          {title}
       </span>
    )

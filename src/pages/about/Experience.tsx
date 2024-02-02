@@ -26,7 +26,7 @@ const Content: React.FC<{ item: IWorkExperience }> = ({ item }) => {
       <div className="flex flex-col text-sm border-l pl-2 pt-5 first:pt-3 pb-3 border-b last:border-b-0
       dark:border-gray-600
       ">
-         <div className="mb-2 ml-[-30px] flex items-center">
+         <div className="mb-2 ml-[-28px] flex items-center">
             <span className="text-cv-700 py-1.5 px-4 inline-block flex-none h-fit bg-white font-semibold border-2 rounded-3xl border-cv-700 mr-3
             dark:bg-gray-800 dark:text-gray-100
             text-xs md:text-sm
@@ -50,7 +50,7 @@ const Content: React.FC<{ item: IWorkExperience }> = ({ item }) => {
 export default function Experience() {
 
    return (
-      <div id={idSections.experience} className='flex flex-0 w-full flex-col'>
+      <div id={idSections.experience} className='flex flex-1 flex-col'>
          <Heading title="Experience" />
          <div className="flex flex-wrap pl-5">
             {jobs.map((i, id) => <Content key={id} item={i} />)}
