@@ -76,7 +76,7 @@ const router: Router = createBrowserRouter(createRoutesFromElements(
       {routes.map(renderRoutes)}
     </Route>
   ]
-), { basename: import.meta.env.MODE === 'development' ? '' : '/my-cv/' })
+), { basename: import.meta.env.MODE === 'development' ? '' : '' })
 
 
 

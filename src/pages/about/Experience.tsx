@@ -3,14 +3,11 @@ import jobs from '@/constants/experience';
 import idSections from '@/constants/id-section-page';
 import { IWorkExperience, TDetailWork } from '@/types';
 import React from "react";
-interface Props {
-   item: IWorkExperience
-}
 
 const renderDetailWork = (details: TDetailWork, id = 0) => {
    return (
       <div key={id} className='last:mt-6'>
-         <p className='text-cv-600 mb-1 font-semibold border-l-2 border-cv-600 pl-2'>{details.company}</p>
+         <a href={details?.website || '#'} target='_blank' className='text-cv-600 mb-1 font-semibold border-l-2 border-cv-600 pl-2'>{details.company}</a>
          <div className='text-gray-500 mb-2 pl-5 whitespace-pre-wrap font-light
             dark:text-gray-400
          '>{details.content}</div>
@@ -24,7 +21,7 @@ const renderDetailWork = (details: TDetailWork, id = 0) => {
    )
 }
 
-const Content: React.FC<Props> = ({ item }) => {
+const Content: React.FC<{ item: IWorkExperience }> = ({ item }) => {
    return (
       <div className="flex flex-col text-sm border-l pl-2 pt-5 first:pt-3 pb-3 border-b last:border-b-0
       dark:border-gray-600

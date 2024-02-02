@@ -25,5 +25,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: process.env.VITE_NODE_ENV === 'production' ? '/my-cv/' : '',
+  base: process.env.VITE_NODE_ENV === 'production' ? '' : '',
 })

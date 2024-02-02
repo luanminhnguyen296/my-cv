@@ -1,6 +1,7 @@
-export type TDetailWork = {
-   content: string,
-   company: string,
+export interface TDetailWork {
+   content: string
+   company: string
+   website?: string
    achievements: string
 }
 export interface IWorkExperience {
