@@ -20,8 +20,6 @@ export default function PointEffect() {
   `
 
    function handleMouseMove(event: MouseEventMove) {
-      console.log("🚀 ~ handleMouseMove ~ event:", event)
-
       setCursor({ x: event.pageX, y: event.pageY })
    }
 
