@@ -21,7 +21,7 @@ function SkillTag({ title, size = 'medium' }: TSkillTagProps) {
       <span className={`
       ${getClassSize(size)}
          rounded-3xl font-semibold leading-none 
-      text-cv-700 bg-[#2f56e316]
+      text-cv-700 bg-[#2f56e310]
       dark:text-[#44e3ff] dark:bg-[#3991d523]
       `}>
          {title}

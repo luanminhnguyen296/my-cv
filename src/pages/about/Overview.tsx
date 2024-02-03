@@ -30,11 +30,19 @@ export default function Overview() {
    const [toast, setToast] = useState<TDataToastMessages | null>(null);
 
    async function handleDownloadCV() {
-      console.log('rest', await downloadCVPDF());
-      setToast({
-         status: 'success',
-         msg: 'Download CV success!'
-      })
+      const res = await downloadCVPDF()
+      if (res) {
+         setToast({
+            status: 'success',
+            msg: 'Download CV success!'
+         })
+      } else {
+         setToast({
+            status: 'error',
+            msg: 'Does not have permission to access file!'
+         })
+      }
+
    }
 
    const ImgStyle = styled.div<{ url: string }>`

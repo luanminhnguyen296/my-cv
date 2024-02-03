@@ -1,68 +1,67 @@
 import { fireStoreCollection } from "@/constants/fire-store";
 import { SchemaContact } from "@/types/schema";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
+import { IProject } from "@/types";
+import { IFetchReturn } from '../types/index';
 
 export type TReturnAddContact = {
-   messages: string,
+   msg: string,
    isSuccess: boolean,
    data?: any,
    error?: any
 }
 
 
+function getFetchReturn(msg: string, cb: (reason: any) => void, status = true, data?: any) {
+   return cb({
+      msg,
+      isSuccess: status,
+      data
+   })
+}
 
-export async function addContact(formData: SchemaContact): Promise<TReturnAddContact> {
+export async function addContactFireStore(formData: SchemaContact): Promise<IFetchReturn<null>> {
    return new Promise((resolve, reject) => {
-      const contactCollection = doc(db, fireStoreCollection.formContact, formData.email)
+      const contactCollection = doc(db, fireStoreCollection.contact, formData.email)
       try {
          setDoc(contactCollection, formData, { merge: true })
             .then(() => {
-               resolve({
-                  messages: 'Document written with ID: ',
-                  isSuccess: true,
-                  data: {
-                     id: '923'
-                  }
-               })
+               getFetchReturn('Document written with ID! ', resolve)
             })
             .catch((e) => {
-               reject({
-                  messages: 'Error adding document:',
-                  isSuccess: false,
-                  error: e
-               })
+               console.log("🚀 ~ e:", e)
+               getFetchReturn('Error adding document! ', reject, false)
             })
       } catch (e) {
-         reject({
-            messages: 'Error adding document:',
-            isSuccess: false,
-            error: e
-         })
+         getFetchReturn('Error adding document! ', reject, false)
       }
    })
 }
 
-// const contactCollection = collection(db, fireStoreCollection.formContact)
-// export async function addContact(formData: SchemaContact): Promise<TReturnAddContact> {
-//    console.log('formData', formData);
+export async function getPortfolioFireStore(): Promise<IFetchReturn<IProject[]> | IFetchReturn<null>> {
 
-//    try {
-//       const docRef = await addDoc(contactCollection, { ...formData, createAt: Date.now() });
-//       console.log("", docRef.id);
-//       return ({
-//          messages: 'Document written with ID: ',
-//          isSuccess: true,
-//          data: {
-//             id: docRef.id
-//          }
-//       })
-//    } catch (e) {
-//       console.error("Error adding document: ", e);
-//       return ({
-//          messages: 'Error adding document:',
-//          isSuccess: false,
-//          error: e
-//       })
-//    }
-// }
+   return new Promise((resolve, reject) => {
+
+      try {
+         const docRef = collection(db, fireStoreCollection.portfolio)
+         getDocs(docRef)
+            .then((docsSnap: any) => {
+               const data: IProject[] = []
+               docsSnap.forEach((doc: any) => {
+                  data.push(doc.data())
+               })
+               if (data.length > 0) {
+                  getFetchReturn('Get portfolio success!', resolve, true, data)
+               } else {
+                  getFetchReturn('No such document!! ', reject, false)
+               }
+            })
+            .catch(() => getFetchReturn('No such document!! ', reject, false))
+      } catch (e) {
+         console.log("🚀 ~ returnnewPromise ~ e:", e)
+         getFetchReturn('No such document!! ', reject, false)
+      }
+   })
+}
+

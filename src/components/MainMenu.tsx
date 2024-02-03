@@ -16,7 +16,7 @@ const menus = [
    },
    {
       path: idSections.whatIsDo,
-      title: "What is do"
+      title: "What i do"
    },
    {
       path: idSections.education,

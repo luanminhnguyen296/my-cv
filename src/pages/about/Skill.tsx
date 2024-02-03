@@ -101,7 +101,7 @@ export default function Skill() {
             <div className="flex flex-row flex-wrap gap-2">
                {
                   // codingSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
-                  codingSkills.map((skill) => <SkillTag key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
+                  codingSkills.map((skill) => <SkillTag key={skill.title} title={skill.title} />)
                }
             </div>
          </div>
@@ -109,7 +109,7 @@ export default function Skill() {
             <Heading title="Design Skills" className="mb-9" />
             <div className="flex flex-row flex-wrap gap-2">
                {
-                  DesignSkills.map((skill) => <SkillTag key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
+                  DesignSkills.map((skill) => <SkillTag key={skill.title} title={skill.title} />)
                   // DesignSkills.map((skill) => <SkillLine key={skill.title} title={skill.title} percentExp={skill.percentExp} />)
                }
             </div>

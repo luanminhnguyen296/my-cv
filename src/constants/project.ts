@@ -2,7 +2,7 @@ import { IProject } from "@/types";
 
 export const projects: IProject[] = [
    {
-      joinAt: 1542646800000,
+      createAt: 1542646800000,
       thumbnail: "https://luanminhnguyen.info/thumbnail-share.png",
       title: "Queen oils essential oils",
       url: "https:queenoils.com.vn",
@@ -11,7 +11,7 @@ export const projects: IProject[] = [
       tech: ["Photoshop", 'Illustrator', "PHP"],
    },
    {
-      joinAt: 1592413200000,
+      createAt: 1592413200000,
       thumbnail: "https://luanminhnguyen.info/thumbnail-share.png",
       title: "Viet Oils essential oils",
       url: "https:vietoils.com",
@@ -20,7 +20,7 @@ export const projects: IProject[] = [
       tech: ["Photoshop", 'Illustrator', "Golang"],
    },
    {
-      joinAt: 1629392400000,
+      createAt: 1629392400000,
       thumbnail: "https://luanminhnguyen.info/thumbnail-share.png",
       title: "Navidock",
       url: "https://navidock.vn/",
@@ -29,7 +29,7 @@ export const projects: IProject[] = [
       tech: ["Photoshop", 'Illustrator', "Wordpress"],
    },
    {
-      joinAt: 1653411600000,
+      createAt: 1653411600000,
       thumbnail: "https://luanminhnguyen.info/thumbnail-share.png",
       title: "Naviflex",
       url: "https://naviflex.vn/",
@@ -38,7 +38,7 @@ export const projects: IProject[] = [
       tech: ["Photoshop", 'Illustrator', "Wordpress"],
    },
    {
-      joinAt: 1706806800000,
+      createAt: 1706806800000,
       thumbnail: "https://luanminhnguyen.info/thumbnail-share.png",
       title: "luanminhnguyen.info(V1)",
       url: "https://luanminhnguyen.info/",

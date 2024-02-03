@@ -4,8 +4,8 @@ import Heading from '@/components/UI/Dropdown/Heading';
 import ToastCV from "@/components/UI/ToastCV";
 import idSections from "@/constants/id-section-page";
 import { validationSchemaContact } from "@/helpers/validation/form";
-import { TReturnAddContact, addContact } from "@/services/fire-store";
-import { TDataToastMessages, TFormContact } from "@/types";
+import { addContactFireStore } from "@/services/fire-store";
+import { IFetchReturn, TDataToastMessages, TFormContact } from "@/types";
 import { SchemaContact } from "@/types/schema";
 import { FastField, Form, Formik } from "formik";
 import { FC, useEffect, useState } from "react";
@@ -52,7 +52,7 @@ export default function Contact() {
       localStorage.setItem('message', JSON.stringify(values))
       setMessageStore(values)
 
-      const result: TReturnAddContact = await addContact(newValue)
+      const result: IFetchReturn<null> = await addContactFireStore(newValue)
       if (result.isSuccess) {
          setToast({
             status: 'success',

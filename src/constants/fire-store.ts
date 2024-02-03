@@ -1,3 +1,4 @@
 export const fireStoreCollection = {
-   formContact: 'contact_form'
+   contact: 'contact_form',
+   portfolio: 'portfolio',
 }

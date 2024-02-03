@@ -43,11 +43,17 @@ export interface TToastProps {
 }
 
 export interface IProject {
-   joinAt: number,
+   createAt: number,
    thumbnail?: string,
    title: string,
    url?: string,
    description: string,
    task: string,
    tech: string[],
+}
+
+export interface IFetchReturn<T> {
+   msg: string
+   isSuccess: boolean
+   data?: T
 }

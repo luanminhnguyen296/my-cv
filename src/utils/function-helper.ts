@@ -1,3 +1,4 @@
+
 export function scrollToSection(id: string) {
    console.log('id:', id);
    const section = document.getElementById(id)
@@ -5,3 +6,4 @@ export function scrollToSection(id: string) {
       scrollTo({ top: section.offsetTop - 120, behavior: "smooth" })
    }
 }
+
