@@ -52,6 +52,20 @@ export interface IProject {
    tech: string[],
 }
 
+
+
+export interface IExperience {
+   createAt: number,
+   major: string,
+   year: string,
+   content: {
+      content: string,
+      company: string,
+      website?: string,
+      achievements: string
+   }[]
+}
+
 export interface IFetchReturn<T> {
    msg: string
    isSuccess: boolean
