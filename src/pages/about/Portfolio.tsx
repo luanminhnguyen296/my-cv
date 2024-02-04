@@ -47,8 +47,8 @@ const Content: React.FC<Props> = ({ project }: { project: IProject }) => {
                <span className='font-semibold'>Task:</span>
                <span className='ml-2'>{project.task}</span>
             </div>
-            <div className='flex flex-wrap gap-2'>
-               {project.tech.map((i, id) => <SkillTag title={i} key={id} size='small' />)}
+            <div className='flex flex-wrap gap-1'>
+               {project.tech.map((i, id) => <SkillTag title={i} key={id} size='xsmall' />)}
             </div>
          </div>
       </div>
@@ -88,7 +88,7 @@ export default function Portfolio() {
          }
          <div id={idSections.portfolio} className='flex basis-[100%] xl:basis-[40%] flex-col lg:ml-10'>
             <Heading title="Portfolio" />
-            <div className="flex flex-wrap gap-y-14 gap-x-5 ">
+            <div className="flex flex-wrap gap-y-6 gap-x-5 ">
                {
                   isLoading && 'Loading data...'
                }

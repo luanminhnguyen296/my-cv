@@ -1,8 +1,10 @@
 import Heading from '@/components/UI/Dropdown/Heading';
-import jobs from '@/constants/experience';
+import ToastCV from '@/components/UI/ToastCV';
 import idSections from '@/constants/id-section-page';
-import { IWorkExperience, TDetailWork } from '@/types';
-import React from "react";
+import { getExperienceFireStore } from '@/services/fire-store';
+import { IExperience, IFetchReturn, IWorkExperience, TDataToastMessages, TDetailWork } from '@/types';
+import { orderBy } from 'lodash';
+import React, { useEffect, useState } from "react";
 
 const renderDetailWork = (details: TDetailWork, id = 0) => {
    return (
@@ -10,13 +12,12 @@ const renderDetailWork = (details: TDetailWork, id = 0) => {
          <a href={details?.website || '#'} target='_blank' className='text-cv-600 mb-1 font-semibold border-l-2 border-cv-600 pl-2'>{details.company}</a>
          <div className='text-gray-500 mb-2 pl-5 whitespace-pre-wrap font-light
             dark:text-gray-400
-         '>{details.content}</div>
+         ' dangerouslySetInnerHTML={{ __html: details.content }} />
          <p className='text-gray-800 font-semibold pl-3
             dark:text-gray-300
          '>Achievements:</p>
          <p className='text-gray-500 mb-3 pl-5 whitespace-pre-wrap font-light
-            dark:text-gray-400
-         '>{details.achievements}</p>
+            dark:text-gray-400' dangerouslySetInnerHTML={{ __html: details.achievements }} />
       </div>
    )
 }
@@ -48,13 +49,47 @@ const Content: React.FC<{ item: IWorkExperience }> = ({ item }) => {
 }
 
 export default function Experience() {
+   const [isLoading, setIsLoading] = useState(false)
+   const [experiences, setExperiences] = useState<IExperience[] | null>(null)
+   const [toast, setToast] = useState<TDataToastMessages | null>(null);
+
+   async function getPortfolio() {
+      setIsLoading(true)
+
+      const res: IFetchReturn<IExperience[] | null> = await getExperienceFireStore()
+      console.log("🚀 ~ getPortfolio ~ res:", res)
+      if (res.isSuccess) {
+         setExperiences(res?.data ? orderBy(res.data, ['createAt'], ['desc']) : [])
+         console.log("🚀 ~ getPortfolio ~ res:", orderBy(res.data, ['createAt'], ['desc']))
+      } else {
+         setToast({
+            status: 'error',
+            msg: res.msg
+         })
+      }
+      setIsLoading(false)
+   }
+
+   useEffect(() => {
+      getPortfolio();
+   }, [])
 
    return (
-      <div id={idSections.experience} className='flex flex-1 flex-col'>
-         <Heading title="Experience" />
-         <div className="flex flex-wrap pl-5">
-            {jobs.map((i, id) => <Content key={id} item={i} />)}
+      <>
+         {
+            toast && <ToastCV data={toast} onCloseToast={setToast} />
+         }
+         <div id={idSections.experience} className='flex flex-1 flex-col'>
+            <Heading title="Experience" />
+            <div className="flex flex-wrap pl-5">
+               {
+                  isLoading && 'Loading data...'
+               }
+               {
+                  experiences && experiences.length > 0 ? experiences?.map((i, id) => <Content item={i} key={id} />) : (!isLoading && 'Experience not available!')
+               }
+            </div>
          </div>
-      </div>
+      </>
    )
 }

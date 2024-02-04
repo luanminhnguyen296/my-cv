@@ -52,10 +52,9 @@ const jobs: IWorkExperience[] = [
          company: 'Viet Oils Trading Ltd',
          website: 'https://vietoils.com/',
          achievements: `• Designed more than 200 images for advertising and website posts.
-• Created more than 2 sets of POSM designs for events at conferences and exhibitions.
-• Designed the entire interface for Navidock.com and the Naviflex website.
-• Designed and created content for 4 profile books and catalogs (each book has about 100 pages).
-• Collaborated with partners to design and construct interiors for a 5-story corporate office.`
+         • Created more than 2 sets of POSM designs for events at conferences and exhibitions.
+         • Designed the entire interface for vietoils.com
+         • Designed and created content for 1 profile books and 1 catalogs (each book has about 30 pages).`
       },
    },
    {

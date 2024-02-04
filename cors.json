@@ -1,10 +1,19 @@
 [
    {
       "origin": [
-         "*"
+         "https://luanminhnguyen.info/*",
+         "*://localhost/*"
       ],
       "method": [
-         "GET"
+         "GET",
+         "HEAD",
+         "POST",
+         "PUT",
+         "DELETE",
+         "CONNECT",
+         "OPTIONS",
+         "TRACE",
+         "PATCH"
       ],
       "maxAgeSeconds": 3600
    }

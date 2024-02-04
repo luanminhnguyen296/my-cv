@@ -1,5 +1,5 @@
 
-export type TSizeTag = 'small' | 'medium' | 'large'
+export type TSizeTag = 'small' | 'medium' | 'large' | 'xsmall'
 export type TSkillTagProps = {
    title: string;
    size?: TSizeTag;
@@ -9,6 +9,8 @@ function SkillTag({ title, size = 'medium' }: TSkillTagProps) {
 
    function getClassSize(size: TSizeTag) {
       switch (size) {
+         case 'xsmall':
+            return 'text-[11px] px-3 py-2'
          case 'small':
             return 'text-xs px-3 py-2'
          case 'medium':
