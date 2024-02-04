@@ -2,7 +2,7 @@ import { fireStoreCollection } from "@/constants/fire-store";
 import { SchemaContact } from "@/types/schema";
 import { doc, setDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
-import { IProject } from "@/types";
+import { IExperience, IProject } from "@/types";
 import { IFetchReturn } from '../types/index';
 
 export type TReturnAddContact = {
@@ -65,3 +65,28 @@ export async function getPortfolioFireStore(): Promise<IFetchReturn<IProject[]> 
    })
 }
 
+export async function getExperienceFireStore(): Promise<IFetchReturn<IExperience[]> | IFetchReturn<null>> {
+
+   return new Promise((resolve, reject) => {
+
+      try {
+         const docRef = collection(db, fireStoreCollection.experience)
+         getDocs(docRef)
+            .then((docsSnap: any) => {
+               const data: IExperience[] = []
+               docsSnap.forEach((doc: any) => {
+                  data.push(doc.data())
+               })
+               if (data.length > 0) {
+                  getFetchReturn('Get experience success!', resolve, true, data)
+               } else {
+                  getFetchReturn('No such document!! ', reject, false)
+               }
+            })
+            .catch(() => getFetchReturn('No such document!! ', reject, false))
+      } catch (e) {
+         console.log("🚀 ~ returnnewPromise ~ e:", e)
+         getFetchReturn('No such document!! ', reject, false)
+      }
+   })
+}
