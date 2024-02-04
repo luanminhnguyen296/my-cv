@@ -12,13 +12,12 @@ const renderDetailWork = (details: TDetailWork, id = 0) => {
          <a href={details?.website || '#'} target='_blank' className='text-cv-600 mb-1 font-semibold border-l-2 border-cv-600 pl-2'>{details.company}</a>
          <div className='text-gray-500 mb-2 pl-5 whitespace-pre-wrap font-light
             dark:text-gray-400
-         '>{details.content}</div>
+         ' dangerouslySetInnerHTML={{ __html: details.content }} />
          <p className='text-gray-800 font-semibold pl-3
             dark:text-gray-300
          '>Achievements:</p>
          <p className='text-gray-500 mb-3 pl-5 whitespace-pre-wrap font-light
-            dark:text-gray-400
-         '>{details.achievements}</p>
+            dark:text-gray-400' dangerouslySetInnerHTML={{ __html: details.achievements }} />
       </div>
    )
 }
