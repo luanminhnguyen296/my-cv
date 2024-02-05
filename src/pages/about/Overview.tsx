@@ -71,9 +71,9 @@ export default function Overview() {
          </div>
 
          <div className='flex flex-1 flex-col justify-center md:pl-10'>
-            <p className='text-gray-400'>Frontend-developer</p>
+            <p className='text-gray-400'>Frontend Developer</p>
             <p className='text-4xl md:text-[2.9rem] text-gray-700 dark:text-gray-100 font-semibold pt-1 pb-5'>Nguyen Minh Luan</p>
-            <p className='text-[0.85rem] text-gray-600 dark:text-gray-300 leading-6 text-justify'>I am a Front-End Developer and Graphic Designer. With my passion and experience, I always strive to take care of and perfect my products with the highest quality. With over 4 years of Graphic Design experience, 1 year as a marketing team leader, and more than 1.5 years as a Front-End Developer, I have successfully implemented and developed a variety of products, including designs for marketing and branding, website UI/UX design, and Front-End construction for company websites and freelance clients.</p>
+            <p className='text-[0.85rem] text-gray-600 dark:text-gray-300 leading-6'>I am a Front-End Developer and Graphic Designer. With my passion and experience, I always strive to take care of and perfect my products with the highest quality. With over 4 years of Graphic Design experience, 1 year as a marketing team leader, and more than 1.5 years as a Front-End Developer, I have successfully implemented and developed a variety of products, including designs for marketing and branding, website UI/UX design, and Front-End construction for company websites and freelance clients.</p>
             <div className='block mt-7'>
                <Button
                   onClick={handleDownloadCV}
