@@ -2,11 +2,11 @@ import Heading from '@/components/UI/Dropdown/Heading';
 import SkillTag from '@/components/UI/SkillTag';
 import ToastCV from '@/components/UI/ToastCV';
 import idSections from "@/constants/id-section-page";
+import useFetch from '@/custom-hooks/useFetch';
 import { getPortfolioFireStore } from '@/services/fire-store';
-import { IFetchReturn, IProject, TDataToastMessages } from "@/types";
+import { IProject } from "@/types";
 import dayjs from 'dayjs';
-import { orderBy } from 'lodash';
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ArrowUpRight } from 'react-bootstrap-icons';
 
 interface Props {
@@ -57,43 +57,21 @@ const Content: React.FC<Props> = ({ project }: { project: IProject }) => {
 
 export default function Portfolio() {
 
-   const [isLoading, setIsLoading] = useState(false)
-   const [portfolio, setPortfolio] = useState<IProject[] | null>(null)
-   const [toast, setToast] = useState<TDataToastMessages | null>(null);
-
-   async function getPortfolio() {
-      setIsLoading(true)
-
-      const res: IFetchReturn<IProject[] | null> = await getPortfolioFireStore()
-      if (res.isSuccess) {
-         setPortfolio(res?.data ? orderBy(res.data, ['createAt'], ['desc']) : [])
-      } else {
-         setToast({
-            status: 'error',
-            msg: res.msg
-         })
-      }
-      setIsLoading(false)
-   }
-
-   useEffect(() => {
-      getPortfolio();
-   }, [])
-
+   const { loading, response: portfolios, error } = useFetch<IProject>(getPortfolioFireStore)
 
    return (
       <>
          {
-            toast && <ToastCV data={toast} onCloseToast={setToast} />
+            error && <ToastCV data={error} />
          }
          <div id={idSections.portfolio} className='flex basis-[100%] xl:basis-[40%] flex-col lg:ml-10'>
             <Heading title="Portfolio" />
             <div className="flex flex-wrap gap-y-6 gap-x-5 ">
                {
-                  isLoading && 'Loading data...'
+                  loading && 'Loading data...'
                }
                {
-                  portfolio && portfolio.length > 0 ? portfolio?.map((i) => <Content project={i} key={i.createAt} />) : (!isLoading && 'Portfolio not available!')
+                  portfolios && portfolios.length > 0 ? portfolios?.map((i) => <Content project={i} key={i.createAt} />) : (!loading && 'Portfolio not available!')
                }
             </div>
          </div>

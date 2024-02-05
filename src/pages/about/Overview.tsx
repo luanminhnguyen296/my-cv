@@ -59,11 +59,15 @@ export default function Overview() {
       }
    }, [])
 
+
+   useEffect(() => {
+      console.log('toast: -<', toast);
+
+   })
+
    return (
       <div id={idSections.overview} className='flex flex-col md:flex-row m-auto md:max-w-[1140px]'>
-         {
-            toast && <ToastCV data={toast} onCloseToast={setToast} />
-         }
+         <ToastCV data={toast} />
          <div className='basis-[43%] p-4 w-full max-w-[450px] md:max-w-[550px] m-auto'>
             <div className='rounded-full p-3 shadow-cv-xl w-full relative dark:bg-zinc-700' style={{ paddingBottom: 'calc(100% - 12px)' }}>
                <ImgStyle id="avatar-main-banner" className='rounded-full absolute left-4 right-4 top-4 bottom-4 ' url={avatar} />

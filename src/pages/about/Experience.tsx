@@ -1,6 +1,7 @@
 import Heading from '@/components/UI/Dropdown/Heading';
 import ToastCV from '@/components/UI/ToastCV';
 import idSections from '@/constants/id-section-page';
+import useFetch from '@/custom-hooks/useFetch';
 import { getExperienceFireStore } from '@/services/fire-store';
 import { IExperience, IFetchReturn, IWorkExperience, TDataToastMessages, TDetailWork } from '@/types';
 import { orderBy } from 'lodash';
@@ -49,44 +50,20 @@ const Content: React.FC<{ item: IWorkExperience }> = ({ item }) => {
 }
 
 export default function Experience() {
-   const [isLoading, setIsLoading] = useState(false)
-   const [experiences, setExperiences] = useState<IExperience[] | null>(null)
-   const [toast, setToast] = useState<TDataToastMessages | null>(null);
-
-   async function getPortfolio() {
-      setIsLoading(true)
-
-      const res: IFetchReturn<IExperience[] | null> = await getExperienceFireStore()
-      console.log("🚀 ~ getPortfolio ~ res:", res)
-      if (res.isSuccess) {
-         setExperiences(res?.data ? orderBy(res.data, ['createAt'], ['desc']) : [])
-         console.log("🚀 ~ getPortfolio ~ res:", orderBy(res.data, ['createAt'], ['desc']))
-      } else {
-         setToast({
-            status: 'error',
-            msg: res.msg
-         })
-      }
-      setIsLoading(false)
-   }
-
-   useEffect(() => {
-      getPortfolio();
-   }, [])
-
+   const { loading, response: data, error } = useFetch<IExperience>(getExperienceFireStore)
    return (
       <>
          {
-            toast && <ToastCV data={toast} onCloseToast={setToast} />
+            error && <ToastCV data={error} />
          }
          <div id={idSections.experience} className='flex flex-1 flex-col'>
             <Heading title="Experience" />
             <div className="flex flex-wrap pl-5">
                {
-                  isLoading && 'Loading data...'
+                  loading && 'Loading data...'
                }
                {
-                  experiences && experiences.length > 0 ? experiences?.map((i, id) => <Content item={i} key={id} />) : (!isLoading && 'Experience not available!')
+                  data && data.length > 0 ? data?.map((i, id) => <Content item={i} key={id} />) : (!loading && 'Experience not available!')
                }
             </div>
          </div>

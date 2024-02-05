@@ -74,8 +74,6 @@ export async function getExperienceFireStore(): Promise<IFetchReturn<IExperience
          const docRefDetails = collection(db, fireStoreCollection.detailsExperience)
          Promise.all([getDocs(docRefExperience), getDocs(docRefDetails)])
             .then((docsSnap: any[]) => {
-               console.log("🚀 ~ .then ~ docsSnap:", docsSnap)
-
                const data: IExperience[] = []
                docsSnap[0].forEach((doc: any) => {
 
