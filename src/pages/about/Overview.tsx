@@ -59,12 +59,6 @@ export default function Overview() {
       }
    }, [])
 
-
-   useEffect(() => {
-      console.log('toast: -<', toast);
-
-   })
-
    return (
       <div id={idSections.overview} className='flex flex-col md:flex-row m-auto md:max-w-[1140px]'>
          <ToastCV data={toast} />

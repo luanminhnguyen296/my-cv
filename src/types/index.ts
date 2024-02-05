@@ -72,3 +72,8 @@ export interface IFetchReturn<T> {
    isSuccess: boolean
    data?: T
 }
+
+export interface ISkill {
+   id: string,
+   skill: string[],
+}

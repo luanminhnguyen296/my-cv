@@ -1,8 +1,8 @@
 import { fireStoreCollection } from "@/constants/fire-store";
 import { SchemaContact } from "@/types/schema";
-import { doc, setDoc, collection, getDocs } from "firebase/firestore";
+import { doc, setDoc, collection, getDocs, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { IDetailsExperience, IExperience, IProject } from "@/types";
+import { IDetailsExperience, IExperience, IProject, ISkill } from "@/types";
 import { IFetchReturn } from '@/types/index';
 
 export type TReturnAddContact = {
@@ -45,6 +45,7 @@ export async function getPortfolioFireStore(): Promise<IFetchReturn<IProject[]> 
 
       try {
          const docRef = collection(db, fireStoreCollection.portfolio)
+
          getDocs(docRef)
             .then((docsSnap: any) => {
                const data: IProject[] = []
@@ -100,6 +101,41 @@ export async function getExperienceFireStore(): Promise<IFetchReturn<IExperience
       } catch (e) {
          console.log("🚀 ~ returnnewPromise ~ e:", e)
          getFetchReturn('No such document!! ', resolve, false)
+      }
+   })
+}
+
+
+export async function getSkillFireStore(): Promise<IFetchReturn<ISkill[]> | IFetchReturn<null>> {
+
+   return new Promise((resolve) => {
+
+      try {
+         const docRef = collection(db, fireStoreCollection.skill)
+         getDocs(docRef)
+            .then((docsSnap: any) => {
+               const data: ISkill[] = []
+
+               docsSnap.forEach((doc: any) => {
+                  data.push({
+                     id: doc.id,
+                     ...doc.data()
+                  })
+               })
+               if (data.length > 0) {
+                  getFetchReturn('Get skill success!', resolve, true, data)
+               } else {
+                  getFetchReturn('No such document!! ', resolve, false)
+               }
+            })
+            .catch((e) => {
+               console.error("🚀 ~ returnnewPromise ~ e:", e)
+               getFetchReturn('No such document!', resolve, false)
+            })
+
+      } catch (e) {
+         console.log("🚀 ~ returnnewPromise ~ e:", e)
+         getFetchReturn('No such document! ', resolve, false)
       }
    })
 }

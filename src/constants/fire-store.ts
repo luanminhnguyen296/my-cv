@@ -3,4 +3,5 @@ export const fireStoreCollection = {
    portfolio: 'portfolio',
    experience: 'experience',
    detailsExperience: 'details_experience',
+   skill: 'skill',
 }

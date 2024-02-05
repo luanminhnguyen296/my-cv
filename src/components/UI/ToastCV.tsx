@@ -20,8 +20,6 @@ const toastStyle = {
 export default function ToastCV({ data, delayAutoClose = 3000 }: TToastProps) {
    const [toast, setToast] = useState(data)
    const style = toastStyle[data?.status || 'success']
-   console.log('toast', toast);
-
 
    useEffect(() => {
       const timer = setTimeout(() => {
