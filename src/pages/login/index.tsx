@@ -1,66 +1,75 @@
 import ResetPassword from '@/components/Authentication/ResetPassword'
 import InputField from '@/components/Forms/InputField'
 import CVButton from '@/components/UI/Button/index'
+import ToastCV from '@/components/UI/ToastCV'
+import { setToken } from '@/features/authentication/authenSlice'
+import { validationSchemaSignIn } from '@/helpers/validation/form'
 import { auth } from '@/services/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { Card, Toast } from 'flowbite-react'
-import { FastField, Form, Formik } from 'formik'
-import { useState } from 'react'
-import { X } from 'react-bootstrap-icons'
+import { TDataToastMessages, TLogin } from '@/types'
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import { Card } from 'flowbite-react'
+import { FastField, Form, FormikHelpers as FormicHelpers, Formik } from 'formik'
+import { useEffect, useState } from 'react'
+import { PersonBoundingBox, ShieldLockFill } from 'react-bootstrap-icons'
 import { Helmet } from 'react-helmet-async'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 
-const toastStyle = {
-   success: {
-      icon: 'bg-green-700 text-white text-green-500 dark:bg-green-800 dark:text-green-200',
-      container: 'bg-green-50 text-green-900'
-   },
-   error: {
-      icon: 'bg-red-700 text-white dark:bg-red-800 dark:text-red-200',
-      container: 'bg-red-50 text-red-900'
-   }
-}
+const BgBlur = styled.div`
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(12px);
+      left: 0;
+      border-radius: 7px;
+      overflow: hidden;
+   `
+
 
 export default function Login() {
 
-   const [showToast, setShowToast] = useState(false);
+   const navigate = useNavigate()
+   const reduxDispatch = useDispatch()
    const [resetPassword, setResetPassword] = useState(false);
-   const [toast, setToast] = useState({
-      status: 'success',
-      msg: ''
-   });
-
+   const [alert, setAlert] = useState<TDataToastMessages | null>(null)
    const initialValues = {
       email: '',
       password: ''
    }
 
-   const handleSubmit = (values: any) => {
-      console.log("🚀 ~ handleSubmit ~ values:", values)
+   const handleSubmit = (values: any, { setErrors }: FormicHelpers<TLogin>) => {
+
       const { email, password } = values
 
       signInWithEmailAndPassword(auth, email, password)
          .then((userCredentials) => {
+            setAlert({
+               status: 'success',
+               msg: 'Login success!'
+            })
             console.log("🚀 ~ .then ~ userCredentials:", userCredentials)
          })
-         .catch((error) => {
-            console.log("🚀 ~ handleSubmit ~ error:", error)
-
+         .catch(() => {
+            setErrors({ 'email': 'Email may be incorrect!', 'password': 'Password may be incorrect' });
+            setAlert({
+               status: 'error',
+               msg: 'An error occurred with log in.'
+            })
          })
    }
 
-   const handleCloseTost = () => {
-      setShowToast(false);
-      setToast({
-         status: 'success',
-         msg: ''
+   const checkLogged = () => {
+      onAuthStateChanged(auth, (user) => {
+         if (user) {
+            navigate('/admin', { replace: true })
+            reduxDispatch(setToken(user.refreshToken))
+         }
       })
    }
 
-   const handleForgotPassword = () => {
-      setResetPassword(true)
-      console.log("🚀 ~ handleForgotPassword ~ 'Forgot Password':", 'Forgot Password')
-   }
+   useEffect(() => checkLogged, [])
 
    return (
       <>
@@ -68,37 +77,45 @@ export default function Login() {
             <title>Login</title>
          </Helmet>
 
-         {
-            showToast &&
-            <Toast className={`fixed right-5 top-5 transition duration-150 ${toastStyle.success.container}`}>
-               <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
-                  <X className="h-5 w-5" />
+         <ToastCV data={alert} />
+         <Card className='max-w-[600px] m-auto md:w-[600px]
+            relative
+            z-999
+            p-8
+            dark:bg-transparent'>
+            <BgBlur />
+            <div className='relative z-10'>
+               <div>
+                  <h3 className='leading-[3rem] mb-8 text-5xl'>
+                     {resetPassword ? 'Reset Password' : 'Login'}
+                     <span className='font-bold font-6xl text-cv-700'>.</span>
+                  </h3>
+                  <div className='text-md font-light mb-8'>
+                     This feature is only for admin users
+                     <Link to='/' className='text-cv-600 font-semibold'> Back home</Link>
+                  </div>
                </div>
-               <div className={`ml-3 text-sm font-normal ${toastStyle.success.container}`}>{toast.msg}</div>
-               <Toast.Toggle onDismiss={handleCloseTost} />
-            </Toast>
-         }
-
-         <Card className='max-w-md m-auto'>
-            <h3 className='leading-[3rem] border-l-4 font-bold border-cv-600 pl-3 mb-4 text-xl bg-gray-50'>{resetPassword ? 'Reset Password' : 'Login'}</h3>
-
-            {
-               !resetPassword ? <Formik initialValues={initialValues} validateOnBlur={true} validateOnChange={true} onSubmit={handleSubmit} >
-                  {
-                     () => (
-                        <Form>
-                           <FastField name='email' label="Email" component={InputField} />
-                           <FastField name='password' label="Password" component={InputField} />
-                           <div className='flex mt-5 gap-2'>
-                              <CVButton type='submit' cvType='bg-color'>Sign In</CVButton>
-                              <CVButton cvType='bg-default' onClick={handleForgotPassword}>Forgot Password</CVButton>
-                           </div>
-                        </Form>
-                     )
-                  }
-               </Formik>
-                  : <ResetPassword handleGoBack={setResetPassword} handleAlert={setToast} onShowToast={setShowToast} />
-            }
+               {
+                  !resetPassword
+                     ? <Formik initialValues={initialValues} validateOnBlur={true} validationSchema={validationSchemaSignIn} validateOnChange={true} onSubmit={handleSubmit} >
+                        {
+                           () => {
+                              return (
+                                 <Form>
+                                    <FastField name='email' label="Email" icon={PersonBoundingBox} component={InputField} />
+                                    <FastField name='password' label="Password" type="password" className='mt-5' icon={ShieldLockFill} component={InputField} />
+                                    <div className='flex mt-10 gap-2'>
+                                       <CVButton type='submit' cvType='bg-cv' >Sign In</CVButton>
+                                       <CVButton cvType='bg-default' onClick={() => setResetPassword(true)}>Forgot Password</CVButton>
+                                    </div>
+                                 </Form>
+                              )
+                           }
+                        }
+                     </Formik>
+                     : <ResetPassword handleGoBack={setResetPassword} />
+               }
+            </div>
          </Card>
       </>
    )

@@ -1,16 +1,15 @@
 // import { App } from '@/App';
 // import MainLayout from '@/layouts/Main';
-import About from '@/pages/about';
-import NotFound from '@/pages/error/NotFound';
-import type { Router } from "@remix-run/router";
-import { Suspense } from 'react';
 import AuthenticationLayout from "@/layouts/Authentication";
-import MainLayout from "@/layouts/Main";
-import Contact from "@/pages/contact/Contact";
+import MainAdmin from "@/layouts/admin/MainAdmin";
+import MainLayout from "@/layouts/client/Main";
+import About from '@/pages/about';
+import Dashboard from "@/pages/admin/Dashboard";
+import NotFound from '@/pages/error/NotFound';
 import Login from "@/pages/login/index.tsx";
 import Register from "@/pages/register";
-import Resume from "@/pages/resume";
-import { FC } from "react";
+import type { Router } from "@remix-run/router";
+import { FC, Suspense } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 
 export type Tlayout = 'main' | 'authentication'
@@ -23,27 +22,11 @@ export type TRoute = {
 }
 
 
-const routes: TRoute[] = [
+const routesClient: TRoute[] = [
   {
     path: '/',
     title: 'About',
     component: About,
-  },
-  {
-    path: 'resume',
-    title: 'Resume',
-    component: Resume,
-  },
-  {
-    path: 'contact',
-    title: 'Contact',
-    component: Contact,
-  },
-  {
-    path: 'register',
-    title: 'Register',
-    component: Register,
-    layout: AuthenticationLayout
   },
   {
     path: 'login',
@@ -51,6 +34,15 @@ const routes: TRoute[] = [
     component: Login,
     layout: AuthenticationLayout
   }
+]
+
+const routesAdmin: TRoute[] = [
+  {
+    path: '/admin',
+    title: 'Dashboard',
+    component: Dashboard,
+    layout: MainAdmin
+  },
 ]
 
 
@@ -73,7 +65,8 @@ const router: Router = createBrowserRouter(createRoutesFromElements(
       <Route element={<MainLayout />}>
         <Route key='*' path='*' element={<NotFound />} />
       </Route>
-      {routes.map(renderRoutes)}
+      {routesClient.map(renderRoutes)}
+      {routesAdmin.map(renderRoutes)}
     </Route>
   ]
 ), { basename: import.meta.env.MODE === 'development' ? '' : '' })

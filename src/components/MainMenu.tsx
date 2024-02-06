@@ -1,13 +1,13 @@
 'use client';
-import { Navbar } from 'flowbite-react';
-import { Link } from 'react-router-dom';
-import ToggleThemeMode from './ToggleThemeMode';
 import idSections from '@/constants/id-section-page';
 import { downloadCVPDF } from '@/services/firebase-storage';
 import { TDataToastMessages } from '@/types';
-import { useState } from 'react';
-import ToastCV from './UI/ToastCV';
 import { scrollToSection } from '@/utils/function-helper';
+import { Navbar } from 'flowbite-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import ToggleThemeMode from './ToggleThemeMode';
+import ToastCV from './UI/ToastCV';
 
 const menus = [
    {
@@ -55,7 +55,7 @@ export default function MainMenu() {
    return (
       <>
          {
-            toast && <ToastCV data={toast} onCloseToast={setToast} />
+            toast && <ToastCV data={toast} />
          }
          {
             menus.map(menu => <Navbar.Link as={Link} key={menu.path} className='font-[500] md:px-4 py-2 leading-10' onClick={() => scrollToSection(menu.path)} to={`/${menu.path}`}>{menu.title}</Navbar.Link>)
