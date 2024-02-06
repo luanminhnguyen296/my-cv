@@ -1,9 +1,12 @@
 import { fireStoreCollection } from "@/constants/fire-store";
-import { IDetailsExperience, IExperience, IProject, ISkill } from "@/types";
+import { IDetailsExperience, IExperience, IIpInfo, IIpInfoSaveStorage, IProject, ISkill } from "@/types";
 import { IFetchReturn } from '@/types/index';
 import { SchemaContact } from "@/types/schema";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
+import { getStorageInfo, checkFullTime } from "@/utils/function-helper";
+import localStorageConst from '@/constants/localStorage'
+
 
 export type TReturnAddContact = {
    msg: string,
@@ -136,6 +139,55 @@ export async function getSkillFireStore(): Promise<IFetchReturn<ISkill[]> | IFet
       } catch (e) {
          console.log("🚀 ~ returnnewPromise ~ e:", e)
          getFetchReturn('No such document! ', resolve, false)
+      }
+   })
+}
+
+
+async function getIpInfoClient(ip: string): Promise<IIpInfo | null> {
+   return new Promise((resolve) => {
+      const docDef = doc(db, fireStoreCollection.visitSite, ip)
+      getDoc(docDef)
+         .then((res: any) => resolve(res.data()))
+         .catch(() => resolve(null))
+   })
+}
+
+export async function sendIpInfoClient(data: IIpInfo): Promise<IFetchReturn<null>> {
+
+   const ipInfoGet: IIpInfo | null = await getIpInfoClient(data.ip)
+
+   return new Promise((rs) => {
+
+      let isFullTime = false
+
+      if (ipInfoGet) isFullTime = checkFullTime(ipInfoGet?.currentTime)
+
+      if (!isFullTime)
+         return rs({
+            isSuccess: true,
+            msg: 'Send info after sometime!'
+         })
+
+      if (!ipInfoGet) data.visitCount = 1
+      else data.visitCount = ipInfoGet?.visitCount ? ipInfoGet?.visitCount + 1 : 1
+
+
+      const docDef = doc(db, fireStoreCollection.visitSite, data.ip)
+
+      try {
+         setDoc(docDef, data, { merge: true })
+            .then(() => {
+               rs({
+                  isSuccess: true,
+                  msg: 'Send info success!'
+               })
+            })
+      } catch {
+         rs({
+            isSuccess: false,
+            msg: 'Send info fail!'
+         })
       }
    })
 }

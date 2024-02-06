@@ -1,3 +1,5 @@
+import { StringFormat } from "firebase/storage";
+
 export interface TDetailWork {
    content: string
    company: string
@@ -80,3 +82,22 @@ export interface ISkill {
 }
 
 export type TLogin = { email: string, password: string }
+
+export interface IIpInfo {
+   ip: string,
+   city: string,
+   country: string,
+   isProxy: boolean,
+   currentTime: number,
+   providerName: string,
+   providerDomain: string,
+   providerRoute: string,
+   timeZoneName: string,
+   visitCount?: number,
+}
+
+export interface IIpInfoSaveStorage {
+   ip: string,
+   updateAt: number,
+   visitCount: number,
+}
