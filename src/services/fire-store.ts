@@ -1,11 +1,10 @@
 import { fireStoreCollection } from "@/constants/fire-store";
-import { IDetailsExperience, IExperience, IIpInfo, IIpInfoSaveStorage, IProject, ISkill } from "@/types";
+import { IDetailsExperience, IExperience, IIpInfo, IProject, ISkill } from "@/types";
 import { IFetchReturn } from '@/types/index';
 import { SchemaContact } from "@/types/schema";
+import { checkFullTime } from "@/utils/function-helper";
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { getStorageInfo, checkFullTime } from "@/utils/function-helper";
-import localStorageConst from '@/constants/localStorage'
 
 
 export type TReturnAddContact = {

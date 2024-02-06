@@ -1,16 +1,14 @@
-// import { App } from '@/App';
-// import MainLayout from '@/layouts/Main';
+
 import AuthenticationLayout from "@/layouts/Authentication";
-import MainAdmin from "@/layouts/admin/MainAdmin";
 import MainLayout from "@/layouts/client/Main";
 import About from '@/pages/about';
-import Dashboard from "@/pages/admin/Dashboard";
 import NotFound from '@/pages/error/NotFound';
 import Login from "@/pages/login/index.tsx";
-import Register from "@/pages/register";
 import type { Router } from "@remix-run/router";
 import { FC, Suspense } from 'react';
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import Dashboard from '../pages/admin/Dashboard';
+import MainAdmin from '@/layouts/admin/MainAdmin';
 
 export type Tlayout = 'main' | 'authentication'
 

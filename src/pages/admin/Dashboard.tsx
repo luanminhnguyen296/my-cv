@@ -1,5 +1,4 @@
-import { auth } from '@/services/firebase'
-import React from 'react'
+import { auth } from '@/services/firebase';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Dashboard() {
