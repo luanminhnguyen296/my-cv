@@ -4,4 +4,5 @@ export const fireStoreCollection = {
    experience: 'experience',
    detailsExperience: 'details_experience',
    skill: 'skill',
+   visitSite: 'visit_site',
 }
