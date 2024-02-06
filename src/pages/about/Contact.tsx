@@ -87,9 +87,7 @@ export default function Contact() {
    return (
       <div id={idSections.contact} className='flex w-full flex-col lg:flex-row gap-8 mb-10'>
 
-         {
-            toast && <ToastCV data={toast} onCloseToast={setToast} />
-         }
+         <ToastCV data={toast} />
 
          <div className="flex flex-col basis-1/3">
             <Heading title="My contact" className="mb-11" />

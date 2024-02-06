@@ -27,7 +27,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: "Poppins",
+        sans: "Lexend Deca",
       },
       textColor: {
         'content': "var(--color-content)",

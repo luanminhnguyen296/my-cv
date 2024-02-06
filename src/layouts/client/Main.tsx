@@ -6,8 +6,7 @@ import PointEffect from '@/components/UI/PointEffect';
 export default function MainLayout() {
 
   return (
-    <>
-
+    <div className='min-h-screen dark:bg-dark-mode dark:text-content flex flex-col justify-between relative'>
       <PointEffect />
       <Header />
       <main className='flex justify-center flex-1 p-5'>
@@ -16,6 +15,7 @@ export default function MainLayout() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
+

@@ -1,17 +1,23 @@
 import { Outlet } from 'react-router-dom'
+import styled from 'styled-components'
+import tw from 'twin.macro'
+import bg from '@/assets/bg-line.svg?url';
 
 
-// type props = {
-//   children: string | JSX.Element | JSX.Element[]
-// }
+const MainStyles = styled('div').withConfig({
+  shouldForwardProp: (props) => props !== 'bgImage',
+}).attrs<{ bgImage: string }>({})`
+   ${tw`min-h-screen dark:bg-dark-mode dark:text-content w-full flex flex-col justify-between pt-5 relative`}
+      background-image:  url(${({ bgImage }) => bgImage});
+      background-position: auto;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+`
 
 export default function AuthenticationLayout() {
   return (
-    <>
-      <main>
-        <h2>AuthenticationLayout</h2>
-        <Outlet />
-      </main>
-    </>
+    <MainStyles bgImage={bg}>
+      <Outlet />
+    </MainStyles>
   )
 }

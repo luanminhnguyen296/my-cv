@@ -1,9 +1,9 @@
 import { fireStoreCollection } from "@/constants/fire-store";
-import { SchemaContact } from "@/types/schema";
-import { doc, setDoc, collection, getDocs, getDoc } from "firebase/firestore";
-import { db } from "./firebase";
 import { IDetailsExperience, IExperience, IProject, ISkill } from "@/types";
 import { IFetchReturn } from '@/types/index';
+import { SchemaContact } from "@/types/schema";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { db } from "./firebase";
 
 export type TReturnAddContact = {
    msg: string,

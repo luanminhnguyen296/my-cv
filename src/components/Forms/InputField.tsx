@@ -1,6 +1,6 @@
 import { Label, TextInput, Textarea } from 'flowbite-react';
 import { ErrorMessage } from 'formik';
-import { HTMLAttributes } from 'react';
+import { FC, HTMLAttributes } from 'react';
 
 
 interface IProps extends HTMLAttributes<HTMLInputElement> {
@@ -12,13 +12,16 @@ interface IProps extends HTMLAttributes<HTMLInputElement> {
    height: number
    placeholder: string,
    disabled: boolean,
+   className: string,
+   icon?: FC<{ className: string }>
 }
 
 const InputField = (props: IProps) => {
    const {
       field,
       className = '',
-      height = 32,
+      height = 36,
+      icon: Icon,
       label = '', placeholder, type = 'text', disabled = false
    } = props;
 
@@ -28,7 +31,12 @@ const InputField = (props: IProps) => {
    return (
       <div className={`flex flex-col ${className}`}>
          {
-            label && <div> <Label className='mb-2 inline-block' htmlFor={name} value={label} /> </div>
+            label && <div className='flex'>
+               {
+                  Icon && <Icon className='text-cv-600 mr-2' />
+               }
+               <Label className='mb-2 inline-block' htmlFor={name} value={label} />
+            </div>
          }
 
          {
@@ -50,7 +58,7 @@ const InputField = (props: IProps) => {
                />
          }
          <ErrorMessage name={name}>
-            {msg => <p className='text-rose-700 italic text-xs mt-1'>*{msg}</p>}
+            {msg => <p className='text-rose-700 italic text-xs mt-1 dark:text-rose-500'>*{msg}</p>}
          </ErrorMessage>
       </div>
 

@@ -1,4 +1,4 @@
-import avatar from '@/assets/avatar.png';
+import avatar from '@/assets/avatar.png?url';
 import ToastCV from '@/components/UI/ToastCV';
 import idSections from '@/constants/id-section-page';
 import { downloadCVPDF } from '@/services/firebase-storage';
@@ -45,11 +45,13 @@ export default function Overview() {
 
    }
 
-   const ImgStyle = styled.div<{ url: string }>`
-         background-image: url(${props => props.url});
-         background-position: center;
-         background-size: 108%;
-         `
+   const ImgStyle = styled('div').withConfig({
+      shouldForwardProp: (props) => props !== 'url',
+   }).attrs<{ url: string }>({})`
+      background-image: url(${({ url }) => url});
+      background-position: center;
+      background-size: 108%;
+   `
 
    useEffect(() => {
       document.body.onmousemove = eventMouse

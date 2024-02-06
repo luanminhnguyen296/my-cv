@@ -17,15 +17,17 @@ const toastStyle = {
 }
 
 
-export default function ToastCV({ data, delayAutoClose = 3000 }: TToastProps) {
+export default function ToastCV({ data, delayAutoClose = 3000, autoClose = true }: TToastProps) {
    const [toast, setToast] = useState(data)
    const style = toastStyle[data?.status || 'success']
 
    useEffect(() => {
-      const timer = setTimeout(() => {
-         setToast(null)
-      }, delayAutoClose)
-      return () => clearTimeout(timer)
+      if (autoClose) {
+         const timer = setTimeout(() => {
+            setToast(null)
+         }, delayAutoClose)
+         return () => clearTimeout(timer)
+      }
    })
 
    useEffect(() => {

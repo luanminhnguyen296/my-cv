@@ -38,6 +38,7 @@ export type TDataToastMessages = {
 
 export interface TToastProps {
    data?: TDataToastMessages | null,
+   autoClose?: boolean,
    delayAutoClose?: number,
 }
 
@@ -77,3 +78,5 @@ export interface ISkill {
    id: string,
    skill: string[],
 }
+
+export type TLogin = { email: string, password: string }
