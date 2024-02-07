@@ -13,6 +13,7 @@ interface IProps extends HTMLAttributes<HTMLInputElement> {
    placeholder: string,
    disabled: boolean,
    className: string,
+   autocomplete?: boolean,
    icon?: FC<{ className: string }>
 }
 
@@ -22,6 +23,7 @@ const InputField = (props: IProps) => {
       className = '',
       height = 36,
       icon: Icon,
+      autocomplete = true,
       label = '', placeholder, type = 'text', disabled = false
    } = props;
 
@@ -49,6 +51,7 @@ const InputField = (props: IProps) => {
             />
                :
                <TextInput sizing="sm"
+                  autoComplete={autocomplete.toString()}
                   style={{ height }}
                   disabled={disabled}
                   placeholder={placeholder}

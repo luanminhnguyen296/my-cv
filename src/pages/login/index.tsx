@@ -9,7 +9,7 @@ import { TDataToastMessages, TLogin } from '@/types'
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { Card } from 'flowbite-react'
 import { FastField, Form, FormikHelpers as FormicHelpers, Formik } from 'formik'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PersonBoundingBox, ShieldLockFill } from 'react-bootstrap-icons'
 import { Helmet } from 'react-helmet-async'
 import { useDispatch } from 'react-redux'
@@ -31,6 +31,7 @@ const BgBlur = styled.div`
 export default function Login() {
 
    const navigate = useNavigate()
+   const effectRan = useRef(false)
    const reduxDispatch = useDispatch()
    const [resetPassword, setResetPassword] = useState(false);
    const [alert, setAlert] = useState<TDataToastMessages | null>(null)
@@ -44,12 +45,15 @@ export default function Login() {
       const { email, password } = values
 
       signInWithEmailAndPassword(auth, email, password)
-         .then((userCredentials) => {
+         .then((userCredentials: any) => {
             setAlert({
                status: 'success',
                msg: 'Login success!'
             })
+            console.log('login success')
             console.log("🚀 ~ .then ~ userCredentials:", userCredentials)
+            reduxDispatch(setToken(userCredentials?._tokenResponse?.refreshToken || null))
+            navigate('/admin', { replace: true })
          })
          .catch(() => {
             setErrors({ 'email': 'Email may be incorrect!', 'password': 'Password may be incorrect' });
@@ -61,15 +65,22 @@ export default function Login() {
    }
 
    const checkLogged = () => {
+      console.log('Check login')
       onAuthStateChanged(auth, (user) => {
+         console.log("🚀 ~ onAuthStateChanged ~ user:", user)
          if (user) {
-            navigate('/admin', { replace: true })
             reduxDispatch(setToken(user.refreshToken))
+            console.log('logged success')
+            navigate('/admin')
          }
       })
    }
 
-   useEffect(() => checkLogged, [])
+   useEffect(() => {
+      if (effectRan.current === true) return;
+      checkLogged()
+      effectRan.current = true;
+   }, [])
 
    return (
       <>
@@ -103,7 +114,7 @@ export default function Login() {
                               return (
                                  <Form>
                                     <FastField name='email' label="Email" icon={PersonBoundingBox} component={InputField} />
-                                    <FastField name='password' label="Password" type="password" className='mt-5' icon={ShieldLockFill} component={InputField} />
+                                    <FastField autocomplete name='password' label="Password" type="password" className='mt-5' icon={ShieldLockFill} component={InputField} />
                                     <div className='flex mt-10 gap-2'>
                                        <CVButton type='submit' cvType='bg-cv' >Sign In</CVButton>
                                        <CVButton cvType='bg-default' onClick={() => setResetPassword(true)}>Forgot Password</CVButton>

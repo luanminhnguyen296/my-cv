@@ -16,11 +16,11 @@ function MainAdmin() {
       if (!isLogin) {
          onAuthStateChanged(auth, (user) => {
             if (user) {
-               navigate('/admin', { replace: true })
                reduxDispatch(setToken(user.refreshToken))
-
             } else {
-               navigate('/login')
+               navigate('/login', { replace: true })
+               console.log('Not logged');
+
             }
          })
 
