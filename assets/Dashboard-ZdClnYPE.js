@@ -1,0 +1,1 @@
+import{q as i,j as n,L as a,t as e}from"./index-Rws0ccsa.js";function r(){const t=i();function s(){e.signOut(),t("/")}return n.jsxs("div",{children:[n.jsx("h2",{children:"This Dashboard"}),n.jsx("button",{onClick:s,children:"Sign Out"}),n.jsx(a,{to:"/",children:"home"})]})}export{r as default};
