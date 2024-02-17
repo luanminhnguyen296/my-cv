@@ -30,7 +30,7 @@ const Trail: React.FC<{ children?: JSX.Element[] }> = ({ children }) => {
 
 export default function Header() {
   return (
-    <header className='sticky top-0 bg-[#ffffffcf] dark:bg-[#222222e8] z-50 backdrop-blur'>
+    <header className='fixed top-0 w-full bg-[#ffffffcf] dark:bg-[#222222e8] z-50 backdrop-blur'>
       <Navbar fluid rounded className='w-full md:block md:w-auto bg-transparent dark:bg-transparent'>
         <Navbar.Brand as={Link} href="/">
           <Trail>
@@ -41,7 +41,7 @@ export default function Header() {
           </Trail>
         </Navbar.Brand>
         <Navbar.Toggle />
-        <Navbar.Collapse className='rounded-lg h-screen lg:h-auto pr-0 lg:pr-5 bg-gray-50 md:flex-row md:space-x-2 rtl:space-x-reverse mt-3 lg:mt-0 md:border-0 md:bg-white dark:bg-transparent dark:border-gray-700'>
+        <Navbar.Collapse className='rounded-lg h-screen lg:h-auto pr-0 lg:pr-5 md:flex-row md:space-x-2 rtl:space-x-reverse mt-3 lg:mt-0 md:border-0 bg-transparent dark:border-gray-700'>
           <MainMenu />
         </Navbar.Collapse>
       </Navbar>
