@@ -18,7 +18,8 @@ const routesClient: TRoute[] = [
     path: '/',
     title: 'About',
     component: lazy(async () => {
-      await sleep(4500);
+      // await sleep(4500);
+      await sleep(50);
       return { default: Home }
     }),
   },

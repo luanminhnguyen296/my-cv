@@ -35,13 +35,14 @@ export default function Header() {
         <Navbar.Brand as={Link} href="/">
           <Trail>
             <Logo />
-            <div className='text-[26px] text-gray-600 dark:text-gray-400'>
+            <div className='block lg:hidden xl:block text-[26px] text-gray-600 dark:text-gray-400'>
               <span className='font-bold text-cv-700'>Henry </span> Nguyen
             </div>
           </Trail>
         </Navbar.Brand>
         <Navbar.Toggle />
-        <Navbar.Collapse className='rounded-lg h-screen lg:h-auto pr-0 lg:pr-5 md:flex-row md:space-x-2 rtl:space-x-reverse mt-3 lg:mt-0 md:border-0 bg-transparent dark:border-gray-700'>
+        <Navbar.Collapse className='rounded-lg h-screen lg:h-auto pr-0 lg:pr-5 
+        md:space-x-2 rtl:space-x-reverse mt-3 lg:mt-0 md:border-0 bg-transparent dark:border-gray-700'>
           <MainMenu />
         </Navbar.Collapse>
       </Navbar>
