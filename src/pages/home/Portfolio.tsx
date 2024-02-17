@@ -1,8 +1,7 @@
-import Heading from '@/components/UI/Dropdown/Heading';
+import Heading from '@/components/UI/Heading';
 import SkillTag from '@/components/UI/SkillTag';
 import ToastCV from '@/components/UI/ToastCV';
-import idSections from "@/constants/id-section-page";
-import useFetch from '@/custom-hooks/useFetch';
+import useFetch from '@/hooks/other/useFetch';
 import { getPortfolioFireStore } from '@/services/fire-store';
 import { IProject } from "@/types";
 import dayjs from 'dayjs';
@@ -24,11 +23,13 @@ const Content: React.FC<Props> = ({ project }: { project: IProject }) => {
          hover:shadow-lg
          dark:hover:bg-[#ffffff0d]
          dark:hover:border-t-gray-600
-      
+         flex-col
+         md:flex-row
+         gap-y-4
       ">
          <div className="text-gray-500 text-sm xl:basis-[25.5%]">
             <div className='uppercase mb-2 text-center dark:group-hover:text-gray-300'>{dayjs(project.createAt).format('MMM - YYYY')}</div>
-            <img src={project.thumbnail} className='w-full max-w-[250px] rounded-md' />
+            <img src={project.thumbnail} className='w-full max-w-full md:max-w-[240px] rounded-md' />
          </div>
 
          <div className="flex-0 md:flex-1">
@@ -47,7 +48,7 @@ const Content: React.FC<Props> = ({ project }: { project: IProject }) => {
                <span className='font-semibold'>Task:</span>
                <span className='ml-2'>{project.task}</span>
             </div>
-            <div className='flex flex-wrap gap-1'>
+            <div className='flex flex-wrap gap-2'>
                {project.tech.map((i, id) => <SkillTag title={i} key={id} size='xsmall' />)}
             </div>
          </div>
@@ -64,7 +65,7 @@ export default function Portfolio() {
          {
             error && <ToastCV data={error} />
          }
-         <div id={idSections.portfolio} className='flex basis-[100%] xl:basis-[40%] flex-col lg:ml-10'>
+         <>
             <Heading title="Portfolio" />
             <div className="flex flex-wrap gap-y-6 gap-x-5 ">
                {
@@ -74,7 +75,7 @@ export default function Portfolio() {
                   portfolios && portfolios.length > 0 ? portfolios?.map((i) => <Content project={i} key={i.createAt} />) : (!loading && 'Portfolio not available!')
                }
             </div>
-         </div>
+         </>
       </>
    )
 }

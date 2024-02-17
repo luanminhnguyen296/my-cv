@@ -1,8 +1,7 @@
-import Heading from '@/components/UI/Dropdown/Heading';
+import Heading from '@/components/UI/Heading';
 import SkillTag from '@/components/UI/SkillTag';
 import ToastCV from '@/components/UI/ToastCV';
-import idSections from "@/constants/id-section-page";
-import useFetch from '@/custom-hooks/useFetch';
+import useFetch from '@/hooks/other/useFetch';
 import { getSkillFireStore } from '@/services/fire-store';
 import { ISkill } from '@/types';
 
@@ -21,7 +20,7 @@ export default function Skill() {
    return (
       <>
          <ToastCV data={error} />
-         <div id={idSections.skill} className='flex flex-col lg:flex-row md:gap-24 w-full gap-y-10'>
+         <>
             <div className="flex flex-col flex-1">
                <Heading title="Coding Skills" className="mb-9" />
                <div className="flex flex-row flex-wrap gap-2">
@@ -44,7 +43,7 @@ export default function Skill() {
                   }
                </div>
             </div>
-         </div>
+         </>
       </>
    )
 }

@@ -1,7 +1,6 @@
-import React from "react"
-import Heading from '@/components/UI/Dropdown/Heading';
+import Heading from '@/components/UI/Heading';
+import React from "react";
 import { CodeSquare, Palette } from "react-bootstrap-icons";
-import idSections from "@/constants/id-section-page";
 
 interface Props {
    title: string;
@@ -49,11 +48,11 @@ const Content: React.FC<Props> = ({ title, job }) => {
 export default function WhatIsDo() {
 
    return (
-      <div id={idSections.whatIsDo} className='flex flex-col mt-5'>
+      <>
          <Heading title="What I Do" />
          <div className="flex flex-wrap gap-y-14 gap-x-5">
             {jobs.map((i, id) => <Content title={i.title} key={id} job={i.job} />)}
          </div>
-      </div>
+      </>
    )
 }

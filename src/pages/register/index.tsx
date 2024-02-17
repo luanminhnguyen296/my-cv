@@ -1,4 +1,4 @@
-import InputField from '@/components/Forms/InputField';
+import InputField from '@/components/UI/Forms/InputField';
 import { validationSchemaRegister } from '@/helpers/validation/form';
 import { auth } from '@/services/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';

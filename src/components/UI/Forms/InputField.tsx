@@ -33,11 +33,11 @@ const InputField = (props: IProps) => {
    return (
       <div className={`flex flex-col ${className}`}>
          {
-            label && <div className='flex'>
+            label && <div className='flex items-center mb-2'>
                {
                   Icon && <Icon className='text-cv-600 mr-2' />
                }
-               <Label className='mb-2 inline-block' htmlFor={name} value={label} />
+               <Label className='inline-block' htmlFor={name} value={label} />
             </div>
          }
 

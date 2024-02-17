@@ -1,7 +1,6 @@
-import Heading from '@/components/UI/Dropdown/Heading';
+import Heading from '@/components/UI/Heading';
 import ToastCV from '@/components/UI/ToastCV';
-import idSections from '@/constants/id-section-page';
-import useFetch from '@/custom-hooks/useFetch';
+import useFetch from '@/hooks/other/useFetch';
 import { getExperienceFireStore } from '@/services/fire-store';
 import { IExperience, IWorkExperience, TDetailWork } from '@/types';
 import React from "react";
@@ -24,7 +23,7 @@ const renderDetailWork = (details: TDetailWork, id = 0) => {
 
 const Content: React.FC<{ item: IWorkExperience }> = ({ item }) => {
    return (
-      <div className="flex flex-col text-sm border-l pl-2 pt-5 first:pt-3 pb-3 border-b last:border-b-0
+      <div className="flex w-full flex-col text-sm border-l pl-2 pt-5 first:pt-3 pb-3 border-b last:border-b-0
       dark:border-gray-600
       ">
          <div className="mb-3 ml-[-28px] flex items-center">
@@ -55,7 +54,7 @@ export default function Experience() {
          {
             error && <ToastCV data={error} />
          }
-         <div id={idSections.experience} className='flex flex-1 flex-col'>
+         <>
             <Heading title="Experience" />
             <div className="flex flex-wrap pl-5">
                {
@@ -65,7 +64,7 @@ export default function Experience() {
                   data && data.length > 0 ? data?.map((i, id) => <Content item={i} key={id} />) : (!loading && 'Experience not available!')
                }
             </div>
-         </div>
+         </>
       </>
    )
 }

@@ -3,7 +3,7 @@ import tw from "twin.macro";
 
 const HeadingStyle = styled.h2`
    position: relative;
-   padding-bottom: 8px;
+   padding-bottom: 11px;
    &:before{
       display: block;
       position: absolute;

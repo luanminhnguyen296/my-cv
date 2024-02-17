@@ -12,7 +12,6 @@ export function handleSendIpInfo() {
 
    ipdata.lookup()
       .then(function (info: any) {
-         console.log("🚀 ~ info:", info)
          const infoData: IIpInfo = {
             ip: info.ip,
             city: info?.city || '',

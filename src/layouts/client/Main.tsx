@@ -17,7 +17,7 @@ export default function MainLayout() {
       <PointEffect />
       <Header />
       <main className='flex justify-center flex-1 p-5'>
-        <div className='container flex flex-wrap gap-y-28'>
+        <div className='container flex flex-wrap gap-y-14 md:gap-y-20'>
           <Outlet />
         </div>
       </main>

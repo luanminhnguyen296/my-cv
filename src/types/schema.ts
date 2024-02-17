@@ -1,4 +1,4 @@
-export interface SchemaContact {
+export interface ISchemaContact {
    email: string
    phone: string
    name: string
@@ -6,3 +6,5 @@ export interface SchemaContact {
    userAgent: string
    createAt: number
 }
+
+export interface ISchemaLogin { email: string, password: string }

@@ -1,60 +1,44 @@
 import avatar from '@/assets/avatar.png?url';
 import ToastCV from '@/components/UI/ToastCV';
 import idSections from '@/constants/id-section-page';
-import { downloadCVPDF } from '@/services/firebase-storage';
+import { downloadCVPDF, moveMouseToMoveImage } from '@/helpers';
 import { TDataToastMessages } from '@/types';
-import { scrollToSection } from '@/utils/function-helper';
+import { scrollToSection } from '@/utils/helper';
 import { Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
-function eventMouse(e: MouseEvent) {
-   const root = document.documentElement
-   const moveX = (e.pageX * -1 / 65);
-   const moveY = (e.pageY * -1 / 65);
-   const avatar = document.getElementById('avatar-main-banner')
-
-   if (avatar) {
-      if (e.pageX === 0 || e.pageX >= root.clientWidth || e.pageY >= root.clientHeight || e.pageY === 0) {
-         avatar.style.backgroundPosition = `${moveX}px ${moveY}px`
-      } else {
-         avatar.style.backgroundPosition = `${moveX}px ${moveY}px`
-      }
-   }
-
-
-}
 
 export default function Overview() {
    const [toast, setToast] = useState<TDataToastMessages | null>(null);
 
    async function handleDownloadCV() {
+
       const res = await downloadCVPDF()
-      if (res) {
+      if (res)
          setToast({
             status: 'success',
             msg: 'Download CV success!'
          })
-      } else {
-         setToast({
-            status: 'error',
-            msg: 'Does not have permission to access file!'
-         })
-      }
+      else setToast({
+         status: 'error',
+         msg: 'Does not have permission to access file!'
+      })
 
    }
 
-   const ImgStyle = styled('div').withConfig({
-      shouldForwardProp: (props) => props !== 'url',
-   }).attrs<{ url: string }>({})`
+   const ImgStyle = styled('div')
+      .withConfig({ shouldForwardProp: (props) => props !== 'url' })
+      .attrs<{ url: string }>({})`
       background-image: url(${({ url }) => url});
       background-position: center;
-      background-size: 108%;
-   `
+      background-size: 108%;`
 
    useEffect(() => {
-      document.body.onmousemove = eventMouse
+
+      document.body.onmousemove = (e: MouseEvent) => moveMouseToMoveImage(e, 'avatar-main-banner')
+
       return () => {
          document.body.onmousemove = null;
          document.body.onmouseout = null;
@@ -62,7 +46,7 @@ export default function Overview() {
    }, [])
 
    return (
-      <div id={idSections.overview} className='flex flex-col md:flex-row m-auto md:max-w-[1140px]'>
+      <>
          <ToastCV data={toast} />
          <div className='basis-[43%] p-4 w-full max-w-[450px] md:max-w-[550px] m-auto'>
             <div className='rounded-full p-3 shadow-cv-xl w-full relative dark:bg-zinc-700' style={{ paddingBottom: 'calc(100% - 12px)' }}>
@@ -92,6 +76,6 @@ export default function Overview() {
             </div>
          </div>
 
-      </div>
+      </>
    )
 }

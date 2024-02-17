@@ -1,5 +1,4 @@
-import Heading from '@/components/UI/Dropdown/Heading';
-import idSections from '@/constants/id-section-page';
+import Heading from '@/components/UI/Heading';
 import { IEducation } from '@/types';
 import React from "react";
 
@@ -54,11 +53,11 @@ const Content: React.FC<Props> = ({ item }) => {
 export default function Education() {
 
    return (
-      <div id={idSections.education} className='flex flex-0 lg:flex-1 flex-col' >
+      <>
          <Heading title="Education" />
          <div className="flex flex-wrap pl-5">
             {jobs.map((i, id) => <Content key={id} item={i} />)}
          </div>
-      </div >
+      </ >
    )
 }

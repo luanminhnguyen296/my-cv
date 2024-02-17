@@ -1,12 +1,8 @@
-import InputField from "@/components/Forms/InputField";
-import CVButton from "@/components/UI/Button";
-import Heading from '@/components/UI/Dropdown/Heading';
-import ToastCV from "@/components/UI/ToastCV";
-import idSections from "@/constants/id-section-page";
+import InputField from "@/components/UI/Forms/InputField";
+import { CVButton, Heading, ToastCV } from "@/components/UI";
 import { validationSchemaContact } from "@/helpers/validation/form";
-import { addContactFireStore } from "@/services/fire-store";
-import { IFetchReturn, TDataToastMessages, TFormContact } from "@/types";
-import { SchemaContact } from "@/types/schema";
+import { addContactFireStore } from "@/services/firestore";
+import { IFetchReturn, TDataToastMessages, TFormContact, ISchemaContact } from "@/types";
 import { FastField, Form, Formik } from "formik";
 import { FC, useEffect, useState } from "react";
 import { Github, Mailbox, Phone, PinMap } from "react-bootstrap-icons";
@@ -25,7 +21,7 @@ const contacts: TContact[] = [
    },
    {
       icon: PinMap,
-      title: 'Le Quang Dinh street, Binh Thanh District, HCM City'
+      title: 'Le Quang Dinh Street, Binh Thanh District, HCM City'
    },
    {
       icon: Github,
@@ -44,7 +40,7 @@ export default function Contact() {
    });
 
    async function handleSubmit(values: TFormContact, actions: any) {
-      const newValue: SchemaContact = {
+      const newValue: ISchemaContact = {
          ...values,
          createAt: Date.now(),
          userAgent: navigator.userAgent
@@ -70,14 +66,10 @@ export default function Contact() {
 
    function getMessageStore() {
       const res = localStorage.getItem('message');
-      if (res !== 'null' && res) {
-         setMessageStore(JSON.parse(res))
-      }
+      if (res !== 'null' && res) setMessageStore(JSON.parse(res))
    }
 
    function handleWatchMessageSent() {
-      console.log('update', messageStore);
-
       if (messageStore?.email)
          setFormContact({ ...messageStore })
    }
@@ -85,7 +77,7 @@ export default function Contact() {
    useEffect(getMessageStore, [])
 
    return (
-      <div id={idSections.contact} className='flex w-full flex-col lg:flex-row gap-8 mb-10'>
+      <>
 
          <ToastCV data={toast} />
 
@@ -98,7 +90,7 @@ export default function Contact() {
                         <span className="text-xl dark:text-gray-400 text-gray-600 pr-5 ">
                            <i.icon />
                         </span>
-                        <span className="font-semibold dark:text-gray-400 text-sm text-gray-600">
+                        <span className="font-semibold dark:text-gray-400 text-xs md:text-sm text-gray-600">
                            {i.title}
                         </span>
                      </div>
@@ -106,27 +98,29 @@ export default function Contact() {
                }
             </div>
          </div>
+
          <div className="flex flex-col flex-1">
             <Heading title="Send messages for me" className="mb-8" />
+
             <Formik enableReinitialize={true} initialValues={formContact} validationSchema={validationSchemaContact} validateOnBlur={true} onSubmit={handleSubmit}>
                {
                   ({ resetForm, isSubmitting }) => (
                      <Form className='flex w-full'>
                         <div className="flex gap-5 flex-1 flex-col lg:flex-row ">
                            <div className="flex basis-2/5 flex-col gap-y-2">
-                              <FastField className='mb-0' height={40} name="name" label="Name" placeholder="Your name..." component={InputField} />
-                              <FastField className='mb-0' height={40} name="email" label="Email" placeholder="Your email..." component={InputField} />
-                              <FastField className='mb-0' height={40} name="phone" label="Phone" placeholder="Your phone..." component={InputField} />
+                              <FastField className='mb-0' height={40} name="name" label="Name" component={InputField} />
+                              <FastField className='mb-0' height={40} name="email" label="Email" component={InputField} />
+                              <FastField className='mb-0' height={40} name="phone" label="Phone" component={InputField} />
                            </div>
                            <div className="flex flex-col grow justify-between">
-                              <FastField className='w-full h-full self-stretch ' type='textarea' name="message" label="Messages" placeholder="Messages..." component={InputField} />
+                              <FastField className='w-full h-full self-stretch ' type='textarea' name="message" label="Messages" component={InputField} />
                               <div className="w-full flex mt-4">
                                  <CVButton type='submit' cvType='bg-cv' disabled={isSubmitting}>Send message</CVButton>
                                  {
                                     messageStore?.email &&
-                                    <CVButton cvType='bg-default' className="ml-3" onClick={handleWatchMessageSent}>Watch message sent</CVButton>
+                                    <CVButton cvType='bg-default' className="ml-3 text-[9px]" onClick={handleWatchMessageSent}>Watch message sent</CVButton>
                                  }
-                                 <CVButton cvType='bg-default' className="ml-3" type='reset' onClick={() => resetForm()}>Reset</CVButton>
+                                 <CVButton cvType='bg-default' className="ml-3 text-[9px]" type='reset' onClick={() => resetForm()}>Reset</CVButton>
                               </div>
                            </div>
                         </div>
@@ -136,6 +130,6 @@ export default function Contact() {
                }
             </Formik>
          </div>
-      </div>
+      </>
    )
 }

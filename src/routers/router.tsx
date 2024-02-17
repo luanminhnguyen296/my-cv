@@ -1,16 +1,17 @@
 
 import AuthenticationLayout from "@/layouts/Authentication";
+import MainAdmin from '@/layouts/admin/MainAdmin';
 import MainLayout from "@/layouts/client/Main";
-import About from '@/pages/about';
 import NotFound from '@/pages/error/NotFound';
 import Login from "@/pages/login/index.tsx";
 import type { Router } from "@remix-run/router";
-import { FC, Suspense } from 'react';
+import { FC, Suspense, lazy } from 'react';
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Dashboard from '../pages/admin/Dashboard';
-import MainAdmin from '@/layouts/admin/MainAdmin';
-
+import { sleep } from "@/utils/helper";
 export type Tlayout = 'main' | 'authentication'
+
+
 
 export type TRoute = {
   path: string,
@@ -24,7 +25,10 @@ const routesClient: TRoute[] = [
   {
     path: '/',
     title: 'About',
-    component: About,
+    component: lazy(async () => {
+      await sleep();
+      return import('@/pages/home')
+    }),
   },
   {
     path: 'login',
@@ -51,7 +55,8 @@ function renderRoutes(route: TRoute) {
       <Route key={route.path} path={route.path} element={
         <Suspense fallback={<h1>Loading...</h1>}>
           <route.component />
-        </Suspense>} />
+        </Suspense>
+      } />
     </Route>
 
   )
@@ -59,13 +64,14 @@ function renderRoutes(route: TRoute) {
 
 const router: Router = createBrowserRouter(createRoutesFromElements(
   [
+
     <Route errorElement={<NotFound />}>
       <Route element={<MainLayout />}>
         <Route key='*' path='*' element={<NotFound />} />
       </Route>
       {routesClient.map(renderRoutes)}
       {routesAdmin.map(renderRoutes)}
-    </Route>
+    </Route >
   ]
 ), { basename: import.meta.env.MODE === 'development' ? '' : '' })
 

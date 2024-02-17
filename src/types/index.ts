@@ -80,7 +80,7 @@ export interface ISkill {
    skill: string[],
 }
 
-export type TLogin = { email: string, password: string }
+
 
 export interface IIpInfo {
    ip: string,
@@ -100,3 +100,8 @@ export interface IIpInfoSaveStorage {
    updateAt: number,
    visitCount: number,
 }
+
+export type { IAuthState } from './redux';
+export type { ISchemaContact, ISchemaLogin } from './schema';
+
+

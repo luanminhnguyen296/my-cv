@@ -28,3 +28,16 @@ export function checkFullTime(time: number) {
          return true;
    }
 }
+
+
+export function sleep(sm = 1000) {
+   return new Promise(resolve => setTimeout(resolve, sm))
+}
+
+export function getFetchReturn(msg: string, cb: (reason: any) => void, status = true, data?: any) {
+   return cb({
+      msg,
+      isSuccess: status,
+      data
+   })
+}

@@ -2,12 +2,12 @@ import styled from 'styled-components'
 
 const LogoStyled = styled.svg`
     stroke-dasharray: 1400;
-    stroke-dashoffset: 0;
-    animation: dash 5s ease-in-out alternate infinite ;
-    animation-delay: 2s;
+    stroke-dashoffset: 1400;
+    animation: dash 4s ease-in-out alternate infinite ;
+    animation-delay: 0;
     @keyframes dash {
     from {
-      stroke-dashoffset: 1400;
+      stroke-dashoffset: 1450;
     }
     to {
       stroke-dashoffset: 0;

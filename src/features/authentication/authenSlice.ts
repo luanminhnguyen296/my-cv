@@ -1,29 +1,33 @@
+import { IAuthState } from '@/types'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface AuthenState {
-   token: string | null
+const initialState: IAuthState = {
+   token: undefined,
+   loading: false,
 }
 
-const initialState: AuthenState = {
-   token: null,
-}
-
-export const authenSlice = createSlice({
-   name: 'authen',
+export const authSlice = createSlice({
+   name: 'auth',
    initialState,
    reducers: {
       remove: (state) => {
          state.token = null
       },
-      setToken: (state, action: PayloadAction<string>) => {
+      setToken: (state, action: PayloadAction<string | null | undefined>) => {
          state.token = action.payload
+      },
+      setLoading: (state, action: PayloadAction<boolean>) => {
+         state.loading = action.payload
+      },
+      setState: (state, action: PayloadAction<IAuthState>) => {
+         state.token = action.payload.token
+         state.loading = action.payload.loading
       },
    },
 })
 
 // Action creators are generated for each case reducer function
-export const { remove, setToken } = authenSlice.actions
-
-export default authenSlice.reducer
-export const selectAuthen = (state: any) => state.authen.token
+export const { remove, setToken, setLoading, setState } = authSlice.actions
+export const selectAuth = (state: any): IAuthState => state.auth
+export default authSlice.reducer

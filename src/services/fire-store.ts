@@ -1,8 +1,7 @@
 import { fireStoreCollection } from "@/constants/fire-store";
 import { IDetailsExperience, IExperience, IIpInfo, IProject, ISkill } from "@/types";
 import { IFetchReturn } from '@/types/index';
-import { SchemaContact } from "@/types/schema";
-import { checkFullTime } from "@/utils/function-helper";
+import { checkFullTime, getFetchReturn } from "@/utils/helper";
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -15,31 +14,15 @@ export type TReturnAddContact = {
 }
 
 
-function getFetchReturn(msg: string, cb: (reason: any) => void, status = true, data?: any) {
-   return cb({
-      msg,
-      isSuccess: status,
-      data
-   })
-}
+// function getFetchReturn(msg: string, cb: (reason: any) => void, status = true, data?: any) {
+//    return cb({
+//       msg,
+//       isSuccess: status,
+//       data
+//    })
+// }
 
-export async function addContactFireStore(formData: SchemaContact): Promise<IFetchReturn<null>> {
-   return new Promise((resolve, reject) => {
-      const contactCollection = doc(db, fireStoreCollection.contact, formData.email)
-      try {
-         setDoc(contactCollection, formData, { merge: true })
-            .then(() => {
-               getFetchReturn('Document written with ID! ', resolve)
-            })
-            .catch((e) => {
-               console.log("🚀 ~ e:", e)
-               getFetchReturn('Error adding document! ', reject, false)
-            })
-      } catch (e) {
-         getFetchReturn('Error adding document! ', reject, false)
-      }
-   })
-}
+
 
 export async function getPortfolioFireStore(): Promise<IFetchReturn<IProject[]> | IFetchReturn<null>> {
 
