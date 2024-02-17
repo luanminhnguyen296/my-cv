@@ -1,4 +1,4 @@
-import { storage } from "@/services/firebase";
+import { storage } from "@/config/firebase";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { ref, getDownloadURL } from "firebase/storage";

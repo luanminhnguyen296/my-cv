@@ -3,7 +3,7 @@ import { IDetailsExperience, IExperience, IIpInfo, IProject, ISkill } from "@/ty
 import { IFetchReturn } from '@/types/index';
 import { checkFullTime, getFetchReturn } from "@/utils/helper";
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../config/firebase";
 
 
 export type TReturnAddContact = {

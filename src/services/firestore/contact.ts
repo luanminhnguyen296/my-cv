@@ -2,7 +2,7 @@ import { fireStoreCollection } from "@/constants/fire-store"
 import { IFetchReturn, ISchemaContact } from "@/types"
 import { getFetchReturn } from "@/utils/helper"
 import { doc, setDoc } from "firebase/firestore"
-import { db } from "../firebase"
+import { db } from "../../config/firebase"
 
 async function addContactFireStore(formData: ISchemaContact): Promise<IFetchReturn<null>> {
    return new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 import { selectAuth, setLoading, setState } from '@/features/authentication/authenSlice'
-import { auth } from '@/services/firebase'
+import { auth } from '@/config/firebase'
 import { Unsubscribe } from '@reduxjs/toolkit'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'

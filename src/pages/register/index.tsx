@@ -1,6 +1,6 @@
 import InputField from '@/components/UI/Forms/InputField';
 import { validationSchemaRegister } from '@/helpers/validation/form';
-import { auth } from '@/services/firebase';
+import { auth } from '@/config/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Button } from 'flowbite-react';
 import { FastField, Form, Formik } from 'formik';

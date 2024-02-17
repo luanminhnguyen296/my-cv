@@ -19,11 +19,11 @@ const firebaseConfig: FirebaseOptions = {
 // Initialize Firebase
 const app: FirebaseApp = initializeApp(firebaseConfig);
 
+const firebaseApp = getApp();
+
 export const auth: Auth = getAuth(app);
 
 export const db = getFirestore(app);
-
-const firebaseApp = getApp();
 
 export const storage = getStorage(firebaseApp, import.meta.env.VITE_FIREBASE_STORAGE);
 
