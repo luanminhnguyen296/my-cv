@@ -1,6 +1,6 @@
 export { default as LoadingMain } from './LoadingMain'
 export { default as Register } from './register'
 export { default as Login } from './login'
-export { default as Home } from './home'
+export { default as Home } from './home/Home'
 export { default as NotFound } from './error/NotFound'
 export { default as Dashboard } from './admin/Dashboard'

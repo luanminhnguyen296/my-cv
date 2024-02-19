@@ -1,9 +1,10 @@
 
 import { AdminLayout, AuthLayout, MainLayout } from "@/layouts";
-import { Dashboard, Home, LoadingMain, Login, NotFound } from "@/pages";
+import { LoadingMain, Login, NotFound } from "@/pages";
 import { sleep } from "@/utils/helper";
 import { FC, Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 export type Tlayout = 'main' | 'authentication'
 
 export type TRoute = {
@@ -16,10 +17,10 @@ export type TRoute = {
 const routesClient: TRoute[] = [
   {
     path: '/',
-    title: 'About',
+    title: 'Home',
     component: lazy(async () => {
       await sleep(4500);
-      return { default: Home }
+      return import('@/pages/home/Home')
     }),
   },
   {
@@ -34,7 +35,7 @@ const routesAdmin: TRoute[] = [
   {
     path: '/admin',
     title: 'Dashboard',
-    component: lazy(async () => ({ default: Dashboard })),
+    component: lazy(async () => import('@/pages/admin/Dashboard')),
     layout: AdminLayout
   },
 ]

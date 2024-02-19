@@ -27,7 +27,7 @@ const routesClient: TRoute[] = [
     title: 'About',
     component: lazy(async () => {
       await sleep();
-      return import('@/pages/home')
+      return import('@/pages/home/Home')
     }),
   },
   {

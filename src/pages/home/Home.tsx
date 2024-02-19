@@ -1,3 +1,4 @@
+import idSections from '@/constants/id-section-page'
 import { animated, useInView, useSpring } from '@react-spring/web'
 import { Helmet } from 'react-helmet-async'
 import Certificates from './Certificates'
@@ -5,10 +6,9 @@ import Contact from './Contact'
 import Education from './Education'
 import Experience from './Experience'
 import Overview from './Overview'
-import Portfolio from './Portfolio'
 import Skill from './Skill'
 import WhatIsDo from './WhatIsDo'
-import idSections from '@/constants/id-section-page'
+import Portfolio from './Portfolio'
 
 const config = { mass: 50, tension: 3000, friction: 600 }
 const optionsAnimate = () => ({
