@@ -13,19 +13,22 @@ import styled from 'styled-components';
 export default function Overview() {
    const [toast, setToast] = useState<TDataToastMessages | null>(null);
 
-   async function handleDownloadCV() {
+   function handleDownloadCV() {
 
-      const res = await downloadCVPDF()
-      if (res)
-         setToast({
-            status: 'success',
-            msg: 'Download CV success!'
+      downloadCVPDF()
+         .then((res) => {
+            if (res)
+               setToast({
+                  status: 'success',
+                  msg: 'Download CV success!'
+               })
+            else {
+               setToast({
+                  status: 'error',
+                  msg: 'Error downloading PDF!'
+               })
+            }
          })
-      else setToast({
-         status: 'error',
-         msg: 'Does not have permission to access file!'
-      })
-
    }
 
    const ImgStyle = styled('div')

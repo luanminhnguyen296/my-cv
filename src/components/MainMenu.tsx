@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ToggleThemeMode from './ToggleThemeMode';
 import ToastCV from './UI/ToastCV';
+import { downloadCVPDF } from '@/helpers';
 
 const menus = [
    {
@@ -67,10 +68,22 @@ export default function MainMenu() {
    const [toast, setToast] = useState<TDataToastMessages | null>(null);
 
    async function handleDownloadCV() {
-      setToast({
-         status: 'success',
-         msg: 'Download CV success!'
-      })
+
+      downloadCVPDF()
+         .then((res) => {
+            if (res)
+               setToast({
+                  status: 'success',
+                  msg: 'Download CV success!'
+               })
+            else {
+               setToast({
+                  status: 'error',
+                  msg: 'Error downloading PDF!'
+               })
+            }
+         })
+
    }
 
    return (

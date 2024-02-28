@@ -18,6 +18,7 @@ export default function
       reduxDispatch(setLoading(true))
       unsubscribe = onAuthStateChanged(auth, async (user) => {
         const jwt = await user?.getIdToken()
+        console.log("🚀 ~ unsubscribe=onAuthStateChanged ~ jwt:", jwt)
         reduxDispatch(setState({ token: jwt || null, loading: false }))
       })
     }

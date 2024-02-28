@@ -1,9 +1,8 @@
 import react from '@vitejs/plugin-react';
-import path, { resolve } from 'path';
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import path from 'path';
+import { defineConfig } from 'vite';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import svgr from 'vite-plugin-svgr';
-import compressionPlugin from 'vite-plugin-compression';
 
 
 // const baseUrl = process.env.VITE_BASE_DOMAIN
@@ -15,13 +14,13 @@ export default defineConfig({
       plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
     },
   }),
-  compressionPlugin({
-    ext: '.gz', // optional, default is .gz
-    deleteOriginFile: false, // optional, default is false
-    algorithm: 'gzip', // optional, default is 'gzip'
-    threshold: 10240, // optional, default is 1024 bytes
-    compressionOptions: { level: 9 }, // optional, default is { level: 9 }
-  }),
+  // compressionPlugin({
+  //   ext: '.gz', // optional, default is .gz
+  //   deleteOriginFile: false, // optional, default is false
+  //   algorithm: 'gzip', // optional, default is 'gzip'
+  //   threshold: 10240, // optional, default is 1024 bytes
+  //   compressionOptions: { level: 9 }, // optional, default is { level: 9 }
+  // }),
   svgr(),
   ViteMinifyPlugin({}),
   {
