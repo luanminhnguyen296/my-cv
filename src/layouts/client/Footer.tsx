@@ -4,7 +4,7 @@ export default function Footer() {
     {
       title: 'Facebook',
       url: import.meta.env.VITE_FACEBOOK,
-      Icon: <Github className='text-xl' />,
+      Icon: <Facebook className='text-xl' />,
     },
     {
       title: 'LinkedIn',
@@ -14,11 +14,11 @@ export default function Footer() {
     {
       title: 'Github',
       url: import.meta.env.VITE_GITHUB,
-      Icon: <Facebook className='text-xl' />,
+      Icon: <Github className='text-xl' />,
     },
   ]
   return (
-    <footer>
+    <footer className='pb-4'>
       <div className='flex border-t border-gray-400 justify-between text-[.8rem] items-center py-4 px-12'>
         <ul className='flex gap-4'>
           {

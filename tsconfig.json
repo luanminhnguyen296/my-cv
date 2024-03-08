@@ -28,14 +28,23 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*"
+        "./src/*",
       ],
     },
   },
   "include": [
     "src",
-    "types"
+    "types",
+    "./auto-imports.d.ts"
   ],
+  // "references": [
+  //   {
+  //     "path": [
+  //       "./tsconfig.node.json",
+  //       "./auto-imports.d.ts" // auto-imports.d.ts
+  //     ]
+  //   }
+  // ]
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -1,7 +1,6 @@
 import designLogo from '@/assets/design-icon.svg?react';
 import itLogo from '@/assets/it-icon.svg?react';
 import marketingLogo from '@/assets/marketing-icon.svg?react';
-import Heading from '@/components/UI/Heading';
 import { ICertificate } from '@/types';
 import React from "react";
 
@@ -57,7 +56,7 @@ export default function Certificates() {
 
    return (
       <>
-         <Heading title="Certificates" />
+         <UIHeading title="Certificates" />
          <div className="flex flex-wrap flex-1 gap-y-3 lg:gap-y-8">
             {certificates.map((i, id) => <Content key={id} item={i} />)}
          </div>

@@ -3,7 +3,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import svgr from 'vite-plugin-svgr';
-
+import AutoImport from 'unplugin-auto-import/vite'// auto-import component
+import { configAutoImport } from './src/config/autoimport';
 
 // const baseUrl = process.env.VITE_BASE_DOMAIN
 
@@ -14,6 +15,7 @@ export default defineConfig({
       plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
     },
   }),
+    AutoImport(configAutoImport as any),// auto-import component
   // compressionPlugin({
   //   ext: '.gz', // optional, default is .gz
   //   deleteOriginFile: false, // optional, default is false
