@@ -34,11 +34,13 @@ const configText = {
 const configOverlay = {
    config,
    from: {
+      y: '-50%',
       opacity: 1,
       x: 0,
       scale: 1.3,
    },
    to: {
+      y: '-50%',
       opacity: 0,
       x: 300,
    },
@@ -54,7 +56,7 @@ export default function LoadingMain() {
 
    return (
       <div className='min-w-screen min-h-screen flex items-center justify-center bg-white dark:bg-dark-mode'>
-         <animated.div style={propOverlay} className='px-2 py-2.5 flex gap-x-2 flex items-center scale-150'>
+         <animated.div style={propOverlay} className='px-2 py-2.5  gap-x-2 flex items-center scale-150 translate-y-[-90%]'>
             <animated.div style={propLogo}>
                <Logo />
             </animated.div>
