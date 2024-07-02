@@ -1,31 +1,11 @@
 import Heading from '@/components/UI/Heading';
+import { EDUCATIONS } from '@/constants/hard-data';
 import { IEducation } from '@/types';
 import React from "react";
 
 interface Props {
    item: IEducation
 }
-
-const jobs: IEducation[] = [
-   {
-      school: 'Technical College Cao Thang',
-      year: '2012 - 2016',
-      major: 'Technology Information',
-      content: 'Pursuing a degree in Information Technology with a specialization in software and website programming at Cao Thang Technical College. Renowned for its excellence in training technical disciplines and information technology, Cao Thang Technical College stands as a distinguished institution for my academic pursuits.'
-   },
-   {
-      school: 'FPT Polytechnic College',
-      year: '2016 - 2018',
-      major: 'Graphic Design',
-      content: 'To enhance my proficiency as a frontend developer, I undertook supplementary graphic design courses at FPT Polytechnic College, a highly esteemed institution recognized by numerous employers for its exceptional training standards.'
-   },
-   {
-      school: 'PACE institute of management',
-      year: '2020',
-      major: 'Chief Marketing Officer',
-      content: 'Throughout my professional journey, I earned a promotion to lead the marketing department. To fortify the essential knowledge required for the role, I enrolled in the short-term Chief Marketing Officer training course at PACE Institute of Management, a renowned institution celebrated for its expertise in training high-level personnel.'
-   },
-]
 
 const Content: React.FC<Props> = ({ item }) => {
    return (
@@ -42,8 +22,7 @@ const Content: React.FC<Props> = ({ item }) => {
          </div>
          <div className="pl-4 pt-2">
             <h5 className="font-semibold mb-2">{item.major}</h5>
-            <p className="text-sm dark:text-gray-400">
-               {item.content}
+            <p className="text-sm dark:text-gray-400" dangerouslySetInnerHTML={{ __html: item.content }}>
             </p>
          </div>
       </div>
@@ -56,7 +35,7 @@ export default function Education() {
       <>
          <Heading title="Education" />
          <div className="flex flex-wrap pl-5">
-            {jobs.map((i, id) => <Content key={id} item={i} />)}
+            {EDUCATIONS.map((i, id) => <Content key={id} item={i} />)}
          </div>
       </ >
    )

@@ -1,36 +1,10 @@
-import designLogo from '@/assets/design-icon.svg?react';
-import itLogo from '@/assets/it-icon.svg?react';
-import marketingLogo from '@/assets/marketing-icon.svg?react';
+import { EDUCATIONS } from '@/constants/hard-data';
 import { ICertificate } from '@/types';
 import React from "react";
 
 interface Props {
    item: ICertificate
 }
-
-const certificates: ICertificate[] = [
-   {
-      school: 'Cao Thang Technical College',
-      year: 'August - 2015',
-      icon: itLogo,
-      major: 'Associate Degree in Information Technology (IT)',
-      content: 'Pursuing a degree in Information Technology with a specialization in software and website programming at Cao Thang Technical College. Renowned for its excellence in training technical disciplines and information technology, Cao Thang Technical College stands as a distinguished institution for my academic pursuits.'
-   },
-   {
-      school: 'FPT Polytechnic College',
-      year: 'June - 2019',
-      icon: designLogo,
-      major: 'Associate Degree in Graphic Design',
-      content: 'To enhance my proficiency as a frontend developer, I undertook supplementary graphic design courses at FPT Polytechnic College, a highly esteemed institution recognized by numerous employers for its exceptional training standards.'
-   },
-   {
-      school: 'PACE institute of management',
-      year: 'February - 2020',
-      icon: marketingLogo,
-      major: 'Chief Marketing Officer',
-      content: 'Throughout my professional journey, I earned a promotion to lead the marketing department. To fortify the essential knowledge required for the role, I enrolled in the short-term Chief Marketing Officer training course at PACE Institute of Management, a renowned institution celebrated for its expertise in training high-level personnel.'
-   },
-]
 
 const Content: React.FC<Props> = ({ item }) => {
    return (
@@ -58,7 +32,7 @@ export default function Certificates() {
       <>
          <UIHeading title="Certificates" />
          <div className="flex flex-wrap flex-1 gap-y-3 lg:gap-y-8">
-            {certificates.map((i, id) => <Content key={id} item={i} />)}
+            {EDUCATIONS.map((i, id) => <Content key={id} item={i} />)}
          </div>
       </>
    )

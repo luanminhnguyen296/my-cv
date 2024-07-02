@@ -15,7 +15,7 @@ const jobs: Props[] = [
       title: 'Frontend Developer',
       job: {
          icon: CodeSquare,
-         content: 'More than 1.5 years of experience learning and practicing Frontend projects for websites and Chrome extensions with frameworks such as Reactjs, Vuejs, Solidjs and css frameworks such as AntDesign, Tailwind, Primer,...'
+         content: 'Almost 4 years of experience learning and practicing Frontend projects for websites and Chrome extensions with frameworks such as Reactjs, Vuejs, Solidjs and css frameworks such as AntDesign, Tailwind, Primer,...'
       }
    },
    {
